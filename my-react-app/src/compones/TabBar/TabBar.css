@@ -21,3 +21,11 @@
     color: white;
     transition: 0.4s;
 }
+.TabBar .ActiveTabStyle{
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+

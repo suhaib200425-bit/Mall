@@ -1,10 +1,12 @@
 import React from 'react'
 import './Store.css'
+import { useNavigate } from 'react-router-dom'
 function Store({StoreObj}) {
-    
+    const Navigate=useNavigate()
   return (
     <div className='Store' onClick={()=>{
-        // Navigate(`/${StoreObj.to}`)
+        window.scrollTo(0,0)
+        Navigate(`/shope/${StoreObj.to}`)
     }}>
         <img src={StoreObj?.Image} alt="" srcset="" />
         <div className="storeName">

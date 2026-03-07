@@ -35,10 +35,7 @@
     position: relative;
     top: -100px;
     display: flex;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    overflow-x: scroll;
-
+    flex-wrap: wrap;
 }
 
 .NestoContent .CardItem {
@@ -51,6 +48,8 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    overflow: hidden;
+    position: relative;
 }
 
 .NestoContent .CardItem img {
@@ -75,6 +74,36 @@
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-weight: 700;
 }
+.dropdown{
+    display: none;
+}
+.dropdown-toggle{
+    background-color: black;
+    color: white;
+    height: 40px;
+    border-radius: 10px;
+
+}
+.rateAndper{
+    display: flex;
+    align-items: center;
+    font-weight: 400;
+    justify-content: space-between;
+}
+.Percentage{
+    height: 35px;
+    width: 100%;
+    background-color: rgb(22, 56, 22);
+    color: white;
+    position: absolute;
+    transform: rotateZ(-40deg);
+    left: -67px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    
+}
 
 @media (max-width:576px) {
     .NestoBanner {
@@ -96,5 +125,11 @@
 }
 .NestoContent .CardsItems{
     flex-wrap: wrap;
+}
+.dropdown{
+    display: block;
+}
+.TABBAR{
+    display: none;
 }
 }

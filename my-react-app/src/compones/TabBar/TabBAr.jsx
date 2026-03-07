@@ -3,7 +3,7 @@ import './TabBar.css'
 
 import { Accessories, BeautyCosmetics, SuperMarket } from '../../assets/assets'
 
-function TabBar({setActive,Active}) {
+function TabBar({setActive,Active,style}) {
     const listShopes = [
         {
             category: 'All'
@@ -21,7 +21,7 @@ function TabBar({setActive,Active}) {
         <div className='TabBar mb-2'>
             {
                 listShopes.map((elem, i) => {
-                    return <div className={Active==elem.category?"Tab ActiveTab":"Tab"} key={i} onClick={()=>{
+                    return <div className={Active==elem.category?`Tab ${!style&&'ActiveTab'}`:`Tab ${style&&' ActiveTab ActiveTabStyle'}`} key={i} onClick={()=>{
                         setActive(elem.category)
                     }}>
                         {elem.category}
