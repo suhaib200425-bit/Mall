@@ -1,0 +1,23 @@
+.TabBar{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0px;
+    width: 100%;
+    overflow-x: scroll;
+    scrollbar-width: none;
+}
+.TabBar .Tab{
+     white-space: nowrap;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: gainsboro;
+    font-size: medium;
+    transition: 0.4s;
+}
+.TabBar .ActiveTab{
+    background-color: rgb(38, 38, 38);
+    color: white;
+    transition: 0.4s;
+}

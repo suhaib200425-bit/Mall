@@ -1,0 +1,89 @@
+.NavBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 10px 20px;
+    background-color: black;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: space-between;
+    z-index: 99;
+}
+
+.NavBar .leftBar img {
+    height: 60px;
+}
+
+.NavBar .centerBar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 40%;
+    height: 40px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: rgba(19, 19, 19, 0.749);
+}
+
+.centerBar .SearchInput {
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 100%;
+    width: 100%;
+    border-radius: 10px;
+    background: transparent;
+    border: none;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+.NavBar .rightBar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rightBar div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 45px;
+    max-width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: rgba(224, 224, 224, 0.423);
+}
+
+.rightBar .ProfileIcon {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.rightBar .SearchIcon {
+    display: none;
+}
+
+@media (max-width:576px) {
+    .NavBar{
+        padding: 5px 6px;
+    }
+    .NavBar .centerBar {
+        display: none;
+    }
+
+    .rightBar .SearchIcon {
+        display: flex;
+    }
+}
+
+@media (min-width: 768px) {}
+
+@media (min-width: 992px) {}
+
+@media (min-width: 1200px) {}
+
+@media (min-width: 1400px) {}

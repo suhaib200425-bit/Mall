@@ -1,0 +1,32 @@
+.Store{
+    border-radius: 10px;
+    line-height: 22px;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid black;
+    overflow: hidden;
+    padding: 10px;
+}
+.Store img{
+    height: 150px;
+    border-radius: 10px;
+}
+.storeName{
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.StoreFloor{
+    font-size: 17px;
+}
+@media (max-width:576px) {
+    .Store{
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+    .Store img{
+        height: 100px;
+    }
+}
