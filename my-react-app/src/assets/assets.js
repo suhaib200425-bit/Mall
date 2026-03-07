@@ -32,36 +32,43 @@ export const stores = [
         Id:1,
         Image: Nesto,
         Name:'Nesto Hypermarket',
-        Floor:'Ground Floor'
+        Floor:'Ground Floor',
+        to:'nesto'
     },   {
         Id:2,
         Image: Nesto,
         Name:'Nesto Hypermarket',
-        Floor:'Ground Floor'
+        Floor:'Ground Floor',
+        to:'nesto'
     },   {
         Id:3,
         Image: Nesto,
         Name:'Nesto Hypermarket',
-        Floor:'Ground Floor'
+        Floor:'Ground Floor',
+        to:'nesto'
     },   {
         Id:4,
         Image: Nesto,
         Name:'Nesto Hypermarket',
-        Floor:'Ground Floor'
+        Floor:'Ground Floor',
+        to:'nesto'
     },   {
         Id:5,
         Image: Nesto,
         Name:'Nesto Hypermarket',
-        Floor:'Ground Floor'
+        Floor:'Ground Floor',
+        to:'nesto'
     },   {
         Id:6,
         Image: Nesto,
         Name:'Nesto Hypermarket',
-        Floor:'Ground Floor'
+        Floor:'Ground Floor',
+        to:'nesto'
     },   {
         Id:7,
         Image: Nesto,
         Name:'Nesto Hypermarket',
-        Floor:'Ground Floor'
+        Floor:'Ground Floor',
+        to:'nesto'
     },   
 ]

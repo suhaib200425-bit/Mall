@@ -2,6 +2,7 @@
 import './App.css'
 import NavBar from './compones/NavBar/NavBar'
 import Home from './page/Home/Home'
+import Nesto from './page/Nesto/Nesto'
 
 function App() {
 
@@ -9,7 +10,7 @@ function App() {
     <>
       <NavBar />
       <div className=''>
-        <Home />
+        <Nesto />
       </div>
     </>
   )
