@@ -13,11 +13,11 @@ function GroceryCard({ Grocery, index }) {
                 }
 
                 // element screeninte topin mukal poyaal remove
-                if (entry.boundingClientRect.top > window.innerHeight  || entry.boundingClientRect.top < 0) {
+                if (entry.boundingClientRect.top > window.innerHeight  ) {
                     boxRef.current.classList.remove("GroceryCardanimateEnter");
                 }
             },
-            { threshold: 0.1 } // 30% screenil vannal
+            { threshold: 0 } 
         );
 
         observer.observe(boxRef.current);
@@ -57,7 +57,7 @@ function GroceryCard({ Grocery, index }) {
     }
     return (
         <div className='GroceryCard' >
-            <div className="CardItem" id={Grocery.id} style={{ animationDelay: `${0.1 * index}s` }} ref={boxRef}>
+            <div className="CardItem" id={Grocery.id} style={{ animationDelay: `${0.05 * index}s` }} ref={boxRef}>
                 <img src={Grocery.image} alt="" srcset="" />
                 <h5>{Grocery.title}</h5>
                 <div className="rateAndper col-8">

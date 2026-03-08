@@ -105,6 +105,86 @@ function Nesto() {
             offerRate: null
         },
         {
+            id:13,
+            image: 'https://i.pinimg.com/736x/ec/e9/c9/ece9c9c03868ae2d265956f70b104710.jpg',
+            title: 'Peas',
+            rate: 70,
+            per: '1kg',
+            offerRate: 50
+        },
+        {
+            id:14,
+            image: 'https://i.pinimg.com/736x/34/ef/49/34ef49aa5a42066812f2c42d0c2e8a63.jpg',
+            title: 'Chilli',
+            rate: 90,
+            per: '1kg',
+            offerRate: 20
+        },
+        {
+            id:15,
+            image: 'https://i.pinimg.com/736x/ef/b0/3a/efb03afe79fc22dffa6b99b63a833e4f.jpg',
+            title: 'Garlic',
+            rate: 120,
+            per: '1kg',
+            offerRate: null
+        },
+        {
+            id:11,
+            image: 'https://i.pinimg.com/1200x/e8/e9/d4/e8e9d4de892dbb440a3a5421ade7f4f0.jpg',
+            title: 'Pumpkin',
+            rate: 25,
+            per: '1kg',
+            offerRate: null
+        },
+        {
+            id:12,
+            image: 'https://i.pinimg.com/736x/e9/97/64/e99764ced2f3048651afdbf7ed2bd15e.jpg',
+            title: 'Beans',
+            rate: 48,
+            per: '1kg',
+            offerRate: null
+        },
+        {
+            id:113,
+            image: 'https://i.pinimg.com/736x/ec/e9/c9/ece9c9c03868ae2d265956f70b104710.jpg',
+            title: 'Peas',
+            rate: 70,
+            per: '1kg',
+            offerRate: 50
+        },
+        {
+            id:14,
+            image: 'https://i.pinimg.com/736x/34/ef/49/34ef49aa5a42066812f2c42d0c2e8a63.jpg',
+            title: 'Chilli',
+            rate: 90,
+            per: '1kg',
+            offerRate: 20
+        },
+        {
+            id:15,
+            image: 'https://i.pinimg.com/736x/ef/b0/3a/efb03afe79fc22dffa6b99b63a833e4f.jpg',
+            title: 'Garlic',
+            rate: 120,
+            per: '1kg',
+            offerRate: null
+        },
+        {
+            id:11,
+            image: 'https://i.pinimg.com/1200x/e8/e9/d4/e8e9d4de892dbb440a3a5421ade7f4f0.jpg',
+            title: 'Pumpkin',
+            rate: 25,
+            per: '1kg',
+            offerRate: null
+        },
+        {
+            id:12,
+            image: 'https://i.pinimg.com/736x/e9/97/64/e99764ced2f3048651afdbf7ed2bd15e.jpg',
+            title: 'Beans',
+            rate: 48,
+            per: '1kg',
+            offerRate: null
+        },
+        {
             id:113,
             image: 'https://i.pinimg.com/736x/ec/e9/c9/ece9c9c03868ae2d265956f70b104710.jpg',
             title: 'Peas',
