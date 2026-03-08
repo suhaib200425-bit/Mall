@@ -11,7 +11,6 @@
     flex-direction: column;
     overflow: hidden;
     position: relative;
-    animation: dropUp 1s ease forwards;
 }
 
 .CardItem img {
@@ -20,6 +19,7 @@
     border-radius: 13px;
     /* box-shadow: 0px 5px 6px; */
 }
+
 
 .CardItem h5 {
     margin: 0;
@@ -99,6 +99,13 @@
     animation: dropDown 1s ease forwards;
 }
 
+.GroceryCardanimateEnter {
+    animation: dropUpEnter 1s ease forwards;
+}
+.GroceryCardanimateRemover{
+
+    animation: dropDownRemover 1s ease forwards;
+}
 @media (max-width:576px) {
     .CardItem {
         height: auto;

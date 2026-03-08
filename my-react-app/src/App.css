@@ -11,7 +11,7 @@
   }
 }
 
-@keyframes dropUp{
+@keyframes dropUpEnter{
   from{
     transform: translateY(100px);
     opacity: 0;
@@ -21,3 +21,15 @@
     opacity: 1;
   }
 }
+
+@keyframes dropDownRemover{
+  from{
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  to{
+    transform: translateY(100);
+    opacity: 0;
+  }
+}
+

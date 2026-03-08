@@ -1,8 +1,31 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './GroceryCard.css'
 import { useMall } from '../../Context/MallContext';
-function GroceryCard({ Grocery,index }) {
-const {cart,setCart}=useMall()
+function GroceryCard({ Grocery, index }) {
+
+    const boxRef = useRef(null);
+    useEffect(() => {
+
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    boxRef.current.classList.add("GroceryCardanimateEnter");
+                }
+
+                // element screeninte topin mukal poyaal remove
+                if (entry.boundingClientRect.top > window.innerHeight  || entry.boundingClientRect.top < 0) {
+                    boxRef.current.classList.remove("GroceryCardanimateEnter");
+                }
+            },
+            { threshold: 0.1 } // 30% screenil vannal
+        );
+
+        observer.observe(boxRef.current);
+
+        return () => observer.disconnect();
+
+    }, []);
+    const { cart, setCart } = useMall()
     function discountPercentage(original, offer) {
         return Math.round(((original - offer) / original) * 100);
     }
@@ -34,7 +57,7 @@ const {cart,setCart}=useMall()
     }
     return (
         <div className='GroceryCard' >
-            <div className="CardItem" style={{animationDelay:`${0.1*index}s`}}>
+            <div className="CardItem" id={Grocery.id} style={{ animationDelay: `${0.1 * index}s` }} ref={boxRef}>
                 <img src={Grocery.image} alt="" srcset="" />
                 <h5>{Grocery.title}</h5>
                 <div className="rateAndper col-8">
@@ -55,7 +78,7 @@ const {cart,setCart}=useMall()
                             <path d="M352 128C352 110.3 337.7 96 320 96C302.3 96 288 110.3 288 128L288 288L128 288C110.3 288 96 302.3 96 320C96 337.7 110.3 352 128 352L288 352L288 512C288 529.7 302.3 544 320 544C337.7 544 352 529.7 352 512L352 352L512 352C529.7 352 544 337.7 544 320C544 302.3 529.7 288 512 288L352 288L352 128z" /></svg>
                     </div>
                     {
-                        cart[Grocery.id]  &&
+                        cart[Grocery.id] &&
                         <>
                             <div className="number" style={{ animationDelay: '0.05s' }}>
                                 {cart[Grocery.id]}
