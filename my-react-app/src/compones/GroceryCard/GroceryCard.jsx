@@ -8,6 +8,8 @@ function GroceryCard({ Grocery, index }) {
 
         const observer = new IntersectionObserver(
             ([entry]) => {
+                console.log(entry);
+                
                 if (entry.isIntersecting) {
                     boxRef.current.classList.add("GroceryCardanimateEnter");
                 }
