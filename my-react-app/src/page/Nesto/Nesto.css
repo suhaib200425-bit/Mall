@@ -104,7 +104,25 @@
     font-weight: 600;
     
 }
-
+.btnscart{
+    position: absolute;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.btnscart .Plus,
+.btnscart .minus,
+.btnscart .number{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: gainsboro;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
 @media (max-width:576px) {
     .NestoBanner {
         height: 35vh;
