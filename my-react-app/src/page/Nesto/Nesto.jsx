@@ -11,7 +11,7 @@ function Nesto() {
     return (
         <div className='Nesto'>
             <div class="NestoBanner">
-                <img src="https://i.pinimg.com/1200x/a6/3f/96/a63f96fd17ccc8164e349f5d295cbcfb.jpg" alt="image" />
+                <img src="https://i.ytimg.com/vi/ka5Nd12JgG0/maxresdefault.jpg" alt="image" />
                 <div class="bottomShade"></div>
             </div>
             <div className="NestoContent ">

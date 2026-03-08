@@ -1,0 +1,32 @@
+.ProfilePop {
+    padding: 10px 15px;
+    border-radius: 5px;
+    width: 300px;
+    backdrop-filter: blur(10px);
+}
+.ProfilePop .ProfileBox{
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    border-radius: 2px solid rgb(255, 255, 255);
+    background-color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+
+}
+.ProfilePop .otherOtion{
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+
+.ProfilePop .otherOtion h5{
+    font-weight: 300;
+}
+.ProfileBox img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}

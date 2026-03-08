@@ -6,6 +6,7 @@ function Cart() {
 
     const [products, setproducts] = useState();
     const { cart, setCart } = useMall()
+    const [ subtotal, setSubtotal ] = useState(0)
 
     useEffect(() => {
         const keys = Object.keys(cart)
@@ -13,15 +14,21 @@ function Cart() {
         const result = Offer.filter(product =>
             keys.includes(product.id.toString())
         )
-
+        //TOTAL
+        const total = result.reduce((sum, item) => {
+            return sum + item.rate
+        }, 0)
+        console.log(total+'SubTotal');
+        
+        setSubtotal(total)
         console.log(result)
         setproducts(result)
     }, [])
 
-    const increase = (id) => {
+    const increase = (id,value) => {
         setCart((prev) => {
+            setSubtotal(prev => prev + value)
             const count = prev[id] || 0;
-
             if (count === 0) {
                 return { ...prev, [id]: 1 }; // first add
             } else {
@@ -30,10 +37,10 @@ function Cart() {
         });
     };
 
-    const decrease = (id) => {
+    const decrease = (id, value) => {
         setCart((prev) => {
             const count = prev[id];
-
+            setSubtotal(prev => prev - value)
             if (count === 1) {
                 const newCart = { ...prev };
                 delete newCart[id]; // remove item
@@ -52,15 +59,15 @@ function Cart() {
     function discountPercentage(original, offer) {
         return Math.round(((original - offer) / original) * 100) + '%';
     }
-    
-    function rowWaystotal(id,rate){
-        return cart[id]*rate
+
+    function rowWaystotal(id, rate) {
+        return cart[id] * rate
     }
     return (
         <div className='Cart' >
             <h2 className="mb-3 mt-3" onClick={() => {
                 console.log(cart);
-            }}>Shopping Cart</h2>
+            }}>Cart</h2>
 
             <div className="row">
 
@@ -69,7 +76,7 @@ function Cart() {
 
                     <div className="cart-box">
 
-                        {(products&&products.length!=0 )? products.map(item => {
+                        {(products && products.length != 0) ? products.map(item => {
 
                             return <div key={item.id} className="cart-item d-flex align-items-center justify-content-between">
 
@@ -86,16 +93,16 @@ function Cart() {
 
                                 <div className="qty-box">
 
-                                    <button onClick={() => decrease(item.id)}>-</button>
+                                    <button onClick={() => decrease(item.id, item.offerRate ? item.offerRate : item.rate)}>-</button>
                                     <span>{cart[item.id]}</span>
-                                    <button onClick={() => increase(item.id)}>+</button>
+                                    <button onClick={() => increase(item.id, item.offerRate ? item.offerRate : item.rate)}>+</button>
 
                                 </div>
 
                                 <div>
                                     {item.offerRate != null ?
-                                        <p>₹{rowWaystotal(item.id,item.offerRate)}/<span style={{ textDecoration: 'line-through' }}>₹{rowWaystotal(item.id,item.rate)}</span></p>
-                                        : <p>₹{rowWaystotal(item.id,item.rate)}/-</p>}
+                                        <p>₹{rowWaystotal(item.id, item.offerRate)}/<span style={{ textDecoration: 'line-through' }}>₹{rowWaystotal(item.id, item.rate)}</span></p>
+                                        : <p>₹{rowWaystotal(item.id, item.rate)}/-</p>}
 
                                 </div>
 
@@ -110,7 +117,7 @@ function Cart() {
 
                             </div>
                         })
-                    :<h5>Empty</h5>}
+                            : <h5>Empty</h5>}
 
                     </div>
 
@@ -144,24 +151,24 @@ function Cart() {
 
                             <div className="d-flex justify-content-between">
                                 <span>Sub Total</span>
-                                <span>$2000</span>
+                                <span>₹{subtotal}</span>
                             </div>
 
-                            <div className="d-flex justify-content-between">
+                            {/* <div className="d-flex justify-content-between">
                                 <span>Discount (10%)</span>
                                 <span>-100</span>
-                            </div>
+                            </div> */}
 
                             <div className="d-flex justify-content-between">
-                                <span>Delivery fee</span>
-                                <span>$50</span>
+                                <span>Plateform fee</span>
+                                <span>₹10</span>
                             </div>
 
                             <hr />
 
                             <div className="d-flex justify-content-between fw-bold">
                                 <span>Total</span>
-                                <span>$1850</span>
+                                <span>{subtotal+10}</span>
                             </div>
 
                         </div>
