@@ -4,6 +4,7 @@ import '../../compones/TabBar/TabBAr'
 import TabBar from '../../compones/TabBar/TabBAr';
 
 import {listShopes} from '../../assets/assets'
+import GroceryCard from '../../compones/GroceryCard/GroceryCard';
 function Nesto() {
     const [Active, setActive] = useState('All')
     const Offer = [
@@ -113,9 +114,6 @@ function Nesto() {
             offerRate: null
         }
     ];
-   function discountPercentage(original, offer){
-   return Math.round(((original - offer) / original) * 100);
-}
 
     return (
         <div className='Nesto'>
@@ -147,34 +145,8 @@ function Nesto() {
                     {
                         Offer.map((elem, index) => {
                             return <div className="col-6 col-md-2 p-2 " key={index}>
-                                <div className="CardItem">
-                                    <img src={elem.image} alt="" srcset="" />
-                                    <h5>{elem.title}</h5>
-                                    <div className="rateAndper col-8">
-
-                                        {elem.offerRate != null ?
-                                            <p>₹{elem.offerRate}  <span style={{ textDecoration: 'line-through' }}>₹{elem.rate}</span></p>
-                                            : <p>₹{elem.rate}</p>}
-
-                                        <p>{elem.per}</p>
-
-                                    </div>
-                                    
-                                        <div className=" btnscart">
-                                            <div className="Plus">
-                                                <svg width={25} height={25} fill='red' xmlns="http://www.w3.org/2050/svg" viewBox="0 0 640 640">
-                                                <path d="M352 128C352 110.3 337.7 96 320 96C302.3 96 288 110.3 288 128L288 288L128 288C110.3 288 96 302.3 96 320C96 337.7 110.3 352 128 352L288 352L288 512C288 529.7 302.3 544 320 544C337.7 544 352 529.7 352 512L352 352L512 352C529.7 352 544 337.7 544 320C544 302.3 529.7 288 512 288L352 288L352 128z"/></svg>
-                                            </div>
-                                            <div className="number">
-                                                2
-                                            </div>
-                                            <div className="minus">
-                                                <svg width={25} height={25} fill='green' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-                                                <path d="M96 320C96 302.3 110.3 288 128 288L512 288C529.7 288 544 302.3 544 320C544 337.7 529.7 352 512 352L128 352C110.3 352 96 337.7 96 320z"/></svg>
-                                            </div>
-                                                </div>
-                                    {elem.offerRate != null && <div className="Percentage">{discountPercentage(elem.rate,elem.offerRate)}%</div>}
-                                </div>
+                                <GroceryCard Grocery={elem} />
+                               
                             </div>
                         })
                     }

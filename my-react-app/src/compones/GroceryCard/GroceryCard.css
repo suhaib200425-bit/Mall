@@ -1,44 +1,4 @@
-.Nesto {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-}
-
-.NestoBanner {
-    padding-top: 60px;
-    position: relative;
-    width: 100%;
-    height: 80vh;
-}
-
-.NestoBanner img {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-.bottomShade {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 60%;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 30%, white 100%);
-}
-
-.NestoContent {
-    /* width: 100%; */
-    margin: 0px 60px;
-}
-
-.NestoContent .CardsItems {
-    position: relative;
-    top: -100px;
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.NestoContent .CardItem {
+.CardItem {
     padding: 5px 10px;
     width: 100%;
     height: 200px;
@@ -52,7 +12,7 @@
     position: relative;
 }
 
-.NestoContent .CardItem img {
+.CardItem img {
     width: 100%;
     height: 120px;
     border-radius: 13px;
@@ -130,39 +90,14 @@
 
 }
 
-
+.btnscart .minus,
+.btnscart .number {
+    opacity: 0;
+    animation: dropDown 1s ease forwards;
+}
 
 @media (max-width:576px) {
-    .NestoBanner {
-        height: 35vh;
-    }
-
-    .NestoContent {
-        margin: 0px 10px;
-    }
-
-    .NestoContent .CardsItems {
-        top: -10px;
-
-    }
-
-    .NestoContent .CardItem img {
-        height: 100px;
-    }
-
-    .NestoContent .CardItem {
+    .CardItem {
         height: auto;
-    }
-
-    .NestoContent .CardsItems {
-        flex-wrap: wrap;
-    }
-
-    .dropdown {
-        display: block;
-    }
-
-    .TABBAR {
-        display: none;
     }
 }

@@ -1,9 +1,12 @@
-.App{
-  padding: 10px 20px;
-  padding-top: 60px;
-}
-@media (max-width:576px) {
-    .App{
-      padding: 5px 10px;
-    }
+
+
+@keyframes dropDown{
+  from{
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  to{
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
