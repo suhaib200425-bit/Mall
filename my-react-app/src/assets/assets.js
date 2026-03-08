@@ -72,3 +72,17 @@ export const stores = [
         to:'nesto'
     },   
 ]
+
+export const listShopes = [
+        {
+            category: 'All'
+        },{
+            category: 'Supermarket'
+        }, {
+            category: 'Accessories'
+        }, {
+            category: 'Beauty & Cosmetics'
+        }, {
+            category: 'Accessories'
+        }
+    ]

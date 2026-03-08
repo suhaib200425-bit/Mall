@@ -1,11 +1,16 @@
 import React from 'react'
 import './NavBar.css'
 import { Logo, ProfilePic } from '../../assets/assets'
+import { useNavigate } from 'react-router-dom'
 function NavBar() {
+    const Navigate=useNavigate()
     return (
         <div className='NavBar'>
             <div className="leftBar">
-                <img src={Logo} alt="" srcset="" />
+                <img src={Logo} alt="" srcset="" onClick={()=>{
+                    window.scrollTo(0,0)
+                    Navigate('/')
+                }} />
             </div>
             <div className="centerBar">
                 <svg className='me-1' width={30} height={30} fill='gray' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">

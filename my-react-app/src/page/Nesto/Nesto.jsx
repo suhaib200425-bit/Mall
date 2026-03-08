@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import './Nesto.css'
 import '../../compones/TabBar/TabBAr'
 import TabBar from '../../compones/TabBar/TabBAr';
+
+import {listShopes} from '../../assets/assets'
 function Nesto() {
     const [Active, setActive] = useState('All')
     const Offer = [
@@ -10,7 +12,7 @@ function Nesto() {
             title: 'Tomato',
             rate: 23,
             per: '1kg',
-            offerRate: 20
+            offerRate: 23
         },
         {
             image: 'https://i.pinimg.com/1200x/67/aa/e7/67aae7d12b6af6394c7eff82dd4471ad.jpg',
@@ -133,8 +135,12 @@ function Nesto() {
                             </button>
 
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Save</a></li>
-                                <li><a class="dropdown-item" href="#">Report</a></li>
+                                {
+                                    listShopes.map(elem=>{
+                                        return <li><a class="dropdown-item" href="#">{elem.category}</a></li>
+                                    })
+                                }
+                                
                             </ul>
                         </div>
                     </div>

@@ -1,22 +1,11 @@
 import React, { useState } from 'react'
 import './TabBar.css'
+import { listShopes } from '../../assets/assets'
 
-import { Accessories, BeautyCosmetics, SuperMarket } from '../../assets/assets'
+
 
 function TabBar({setActive,Active,style}) {
-    const listShopes = [
-        {
-            category: 'All'
-        },{
-            category: 'Supermarket'
-        }, {
-            category: 'Accessories'
-        }, {
-            category: 'Beauty & Cosmetics'
-        }, {
-            category: 'Accessories'
-        }
-    ]
+    
     return (
         <div className='TabBar mb-2'>
             {
