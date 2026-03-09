@@ -187,17 +187,23 @@ button i {
   color: white;
 }
 
+.bottomcreatebtn {
+  display: none;
+}
+
 @media (max-width:576px) {
   .signup-container {
     background: #1e2433;
   }
 
   .signup-container {
-    height: auto;
+    /* height: auto; */
     border-radius: 0px;
+    align-items: start;
   }
 
   .signup-card {
+  box-shadow: none;
     display: block;
     border-radius: 0px;
   }
@@ -229,5 +235,17 @@ button i {
   .signup-right .logobox span {
     font-size: 16px;
     font-weight: 300;
+  }
+
+  .bottomcreatebtn {
+    display: block;
+  }
+  .buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .topcreatebtn{
+    display: none;
   }
 }

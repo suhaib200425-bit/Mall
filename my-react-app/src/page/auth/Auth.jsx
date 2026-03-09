@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import "./Auth.css";
-
+import axios from 'axios'
 function Auth() {
 
   const [page, setPage] = useState(true)
@@ -34,12 +34,57 @@ function Auth() {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
 
     e.preventDefault(); // form reload stop cheyyum
     console.log("Form submitted");
-    console.log(Formdata);
-    Navigate('/home')
+    const formData = new FormData()
+
+    formData.append("name", `${Formdata.firstName} ${Formdata.lastName}`)
+    formData.append("email", Formdata.emailId)
+    formData.append("password", Formdata.password)
+    formData.append("confirmPassword", Formdata.confirmPassword)
+    formData.append("role", Formdata.role)
+
+    if (Formdata.ProfileLogo)
+      formData.append("profilePic", Formdata.ProfileLogo)
+
+    if (Formdata.CoverImage)
+      formData.append("coverPic", Formdata.CoverImage)
+
+    const result = await registerUser(formData)
+
+    console.log(result)
+    // Navigate('/home')
+  }
+
+  //REGISTER
+
+  const registerUser = async (formData) => {
+
+    try {
+
+      const response = await axios.post(
+        "http://localhost:5000/api/user/register",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        }
+      )
+
+      return response.data
+
+    } catch (error) {
+
+      return {
+        status: false,
+        message: error.message
+      }
+
+    }
+
   }
 
 
@@ -56,10 +101,10 @@ function Auth() {
                 setFormdata({
                   firstName: '',
                   lastName: '',
-                  businessName: '',
                   emailId: '',
                   password: '',
-                  confirmPassword: ''
+                  confirmPassword: '',
+                  role:'user'
                 })
               }}>User</span>
               <span className={usertype == 'Business' && 'ActiveType'} onClick={() => {
@@ -67,10 +112,10 @@ function Auth() {
                 setFormdata({
                   firstName: '',
                   lastName: '',
-                  businessName: '',
                   emailId: '',
                   password: '',
-                  confirmPassword: ''
+                  confirmPassword: '',
+                  role:'owner'
                 })
               }}>Business</span>
             </div>
@@ -87,7 +132,6 @@ function Auth() {
               setFormdata({
                 firstName: '',
                 lastName: '',
-                businessName: '',
                 emailId: '',
                 password: '',
                 confirmPassword: ''
@@ -103,7 +147,7 @@ function Auth() {
                   usertype == 'User' ? <>
                     <input value={Formdata.firstName} required onChange={(e) => { handleChange(e) }} name="firstName" type="text" placeholder="First name" />
                     <input value={Formdata.lastName} required onChange={(e) => { handleChange(e) }} name="lastName" type="text" placeholder="Last name" /></> :
-                    <input value={Formdata.businessName} required onChange={(e) => { handleChange(e) }} name="businessName" type="text" placeholder="Business Name" />
+                    <input value={Formdata.firstName} required onChange={(e) => { handleChange(e) }} name="firstName" type="text" placeholder="Business Name" />
                 }
               </div>
             }
@@ -116,7 +160,7 @@ function Auth() {
             {!page && <input value={Formdata.confirmPassword} required onChange={(e) => { handleChange(e) }} name="confirmPassword" type="password" placeholder="Confirm Password" />}
 
             <div className="buttons" onClick={handleSubmit}>
-              <button className="create col-12">
+              <button className={usertype == 'User' ? "create col-12" : "create topcreatebtn col-12"}>
                 {
                   page ? 'Login' : 'Create account'
                 }
@@ -179,7 +223,7 @@ function Auth() {
           }
         </div>
         <div className="buttons" onClick={handleSubmit}>
-          <button className="create col-12 mb-3 ps-2 pe-2" style={{display:usertype=='User'?'none':''}}>
+          <button className="create bottomcreatebtn col-11 mb-5 ms-2 me-2" style={{ display: usertype == 'User' ? 'none' : '' }}>
             {
               page ? 'Login' : 'Create account'
             }
