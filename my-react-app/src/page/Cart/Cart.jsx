@@ -16,7 +16,8 @@ function Cart() {
         )
         //TOTAL
         const total = result.reduce((sum, item) => {
-            return sum + item.rate
+            const price=item.offerRate?item.offerRate:item.rate
+            return sum + (price*cart[item.id])
         }, 0)
         console.log(total+'SubTotal');
         

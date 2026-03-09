@@ -18,10 +18,21 @@
 }
 .ProfilePop .otherOtion{
     background-color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     border-radius: 10px;
     padding: 5px 10px;
 }
-
+.ProfilePop .otherOtion div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(223, 215, 215, 0.763);
+    gap: 10px;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
 .ProfilePop .otherOtion h5{
     font-weight: 300;
 }

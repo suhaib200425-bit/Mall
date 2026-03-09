@@ -1,6 +1,7 @@
 
 import './App.css'
 import NavBar from './compones/NavBar/NavBar'
+import Auth from './page/auth/Auth';
 import Cart from './page/Cart/Cart';
 import Home from './page/Home/Home'
 import Nesto from './page/Nesto/Nesto'
@@ -11,10 +12,11 @@ function App() {
     <>
       <NavBar />
       <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/shope/:shope" element={<Nesto />} />
-      <Route path="/cart" element={<Cart />} />
-    </Routes>
+        <Route path='/' element={<Auth />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/shope/:shope" element={<Nesto />} />
+        <Route path="/cart" element={<Cart />} />
+      </Routes>
     </>
   )
 }
