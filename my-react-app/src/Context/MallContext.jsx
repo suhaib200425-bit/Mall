@@ -11,9 +11,10 @@ export const AppProvider = ({ children }) => {
     useEffect(() => {
         const apiworking = async () => {
             console.log('start');
-            
-            const response = await axios.get(`${API_END_POINT}/api/user`)
+
+            const response = await axios.get(`${API_END_POINT}`)
             console.log(response.data);
+            alert(response.data)
 
         }
         apiworking()
