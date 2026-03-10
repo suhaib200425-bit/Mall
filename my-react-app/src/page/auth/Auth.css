@@ -190,7 +190,14 @@ button i {
 .bottomcreatebtn {
   display: none;
 }
-
+.dropdownbtn{
+  width: 100%;
+}
+.dropdown-menu{
+  height: 400px;
+  overflow-y: scroll;
+  border-radius: 10px;
+}
 @media (max-width:576px) {
   .signup-container {
     background: #1e2433;

@@ -5,10 +5,23 @@ const registerUser = async (req, res) => {
 
     try {
 
-        const { name, email, password, confirmPassword, role } = req.body
+        const { name, email, password, confirmPassword, role, category } = req.body
+console.log(req.body);
+
+        if (!name || !email || !password || !confirmPassword || !role) {
+            return res.json({ status: false, message: "All filed Is requird" })
+        }
 
         if (password !== confirmPassword) {
             return res.json({ status: false, message: "Passwords do not match" })
+        }
+
+        // category check
+        if (role !== "user" && !category) {
+            return res.json({
+                status: false,
+                message: "Category is required for shop owners"
+            });
         }
 
         const existingUser = await User.findOne({ email })
@@ -33,7 +46,7 @@ const registerUser = async (req, res) => {
             password: hashedPassword,
             profilePic,
             coverPic,
-            role:role || 'user'
+            role: role || 'user'
         })
 
         await user.save()

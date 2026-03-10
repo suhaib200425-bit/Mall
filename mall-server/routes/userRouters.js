@@ -1,6 +1,6 @@
 const express = require("express")
 const upload = require("../middleware/multer")
-const { registerUser } = require("../controllers")
+const { registerUser, loginUser } = require("../controllers")
 const router = express.Router()
 
 router.post(
@@ -11,6 +11,12 @@ router.post(
    ]),
    registerUser
 )
+
+router.post(
+   "/login",
+   loginUser
+)
+
 router.get("/",(req,res)=>{
     res.send("USER API Working")
 })

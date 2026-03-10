@@ -11,7 +11,7 @@ function NavBar() {
             <div className="leftBar">
                 <img src={Logo} alt="" srcset="" onClick={() => {
                     window.scrollTo(0, 0)
-                    Navigate('/')
+                    Navigate('/home')
                 }} />
             </div>
             <div className="centerBar">

@@ -2,11 +2,23 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from 'react-router-dom'
 import "./Auth.css";
 import axios from 'axios'
+import { categories } from "../../assets/main";
+import { loginUser, registerUser } from "./AuthFun";
 function Auth() {
 
   const [page, setPage] = useState(true)
   const [usertype, setUsertype] = useState('User')
-  const [Formdata, setFormdata] = useState({})
+  const [CoverImage, setCoverImage] = useState('')
+  const [ProfileLogo, seProfileLogo] = useState('')
+  const [Formdata, setFormdata] = useState({
+    firstName: '',
+    lastName: '',
+    emailId: '',
+    password: '',
+    confirmPassword: '',
+    role: 'owner',
+    category: '',
+  })
   const fileInput1 = useRef(null);
   const fileInput2 = useRef(null);
   const Navigate = useNavigate()
@@ -28,6 +40,11 @@ function Auth() {
     const file = e.target.files[0];
     if (file) {
       const imageUrl = URL.createObjectURL(file);
+      if (e.target.name == 'CoverImage')
+        setCoverImage(imageUrl)
+      if (e.target.name == 'ProfileLogo') {
+        seProfileLogo(imageUrl)
+      }
       setFormdata(prev => {
         return { ...prev, [e.target.name]: file }
       });
@@ -39,53 +56,38 @@ function Auth() {
     e.preventDefault(); // form reload stop cheyyum
     console.log("Form submitted");
     const formData = new FormData()
-
-    formData.append("name", `${Formdata.firstName} ${Formdata.lastName}`)
-    formData.append("email", Formdata.emailId)
-    formData.append("password", Formdata.password)
-    formData.append("confirmPassword", Formdata.confirmPassword)
-    formData.append("role", Formdata.role)
-
+    if (Formdata.firstName)
+      formData.append("name", `${Formdata.firstName} ${Formdata.lastName}`)
+    if (Formdata.emailId)
+      formData.append("email", Formdata.emailId)
+    if (Formdata.password)
+      formData.append("password", Formdata.password)
+    if (Formdata.confirmPassword)
+      formData.append("confirmPassword", Formdata.confirmPassword)
+    if (Formdata.role)
+      formData.append("role", Formdata.role)
     if (Formdata.ProfileLogo)
       formData.append("profilePic", Formdata.ProfileLogo)
-
     if (Formdata.CoverImage)
       formData.append("coverPic", Formdata.CoverImage)
+    if (Formdata.category)
+      formData.append("category", Formdata.category)
 
-    const result = await registerUser(formData)
+    console.log(Formdata);
 
+    let result
+    if (page)
+      result = await loginUser(Formdata.emailId, Formdata.password)
+    else {
+      result = await registerUser(formData)
+    }
     console.log(result)
     // Navigate('/home')
   }
 
-  //REGISTER
 
-  const registerUser = async (formData) => {
 
-    try {
 
-      const response = await axios.post(
-        "http://localhost:5000/api/user/register",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          }
-        }
-      )
-
-      return response.data
-
-    } catch (error) {
-
-      return {
-        status: false,
-        message: error.message
-      }
-
-    }
-
-  }
 
 
   return (
@@ -104,7 +106,8 @@ function Auth() {
                   emailId: '',
                   password: '',
                   confirmPassword: '',
-                  role:'user'
+                  role: 'user',
+                  Category: ''
                 })
               }}>User</span>
               <span className={usertype == 'Business' && 'ActiveType'} onClick={() => {
@@ -115,7 +118,8 @@ function Auth() {
                   emailId: '',
                   password: '',
                   confirmPassword: '',
-                  role:'owner'
+                  role: 'owner',
+                  Category: ''
                 })
               }}>Business</span>
             </div>
@@ -134,7 +138,9 @@ function Auth() {
                 lastName: '',
                 emailId: '',
                 password: '',
-                confirmPassword: ''
+                confirmPassword: '',
+                role: 'user',
+                Category: ''
               })
             }}>{page ? 'Create' : 'Log In'}</span>
           </p>
@@ -197,7 +203,7 @@ function Auth() {
                 <div className="logo">
                   <img id="fileInput1" onClick={() => {
                     handleImageClick(fileInput1)
-                  }} src="https://i.pinimg.com/736x/29/47/9b/29479ba0435741580ca9f4a467be6207.jpg" alt="" srcset="" />
+                  }} src={ProfileLogo != '' ? ProfileLogo : "https://i.pinimg.com/736x/29/47/9b/29479ba0435741580ca9f4a467be6207.jpg"} alt="" srcSet="" />
                   <input
                     type="file"
                     ref={fileInput1}
@@ -206,12 +212,29 @@ function Auth() {
                     onChange={handleFileChange}
                   />
                 </div>
-                <span>Slecte Your Business Logo</span>
+                <div className="dropdownbtn">
+                  <span>Select Your Logo And Category</span>
+                  <div class="dropdown " style={{ display: 'block' }}>
+                    <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                      {Formdata.category ? Formdata.category : "Category's"}
+                    </button>
+
+                    <ul class="dropdown-menu">
+                      {
+                        categories.map((elem, index) => (
+                          <li key={index}><a class="dropdown-item" onClick={() => setFormdata(prev => {
+                            return { ...prev, category: elem }
+                          })} href="#">{elem}</a></li>
+                        ))
+                      }
+                    </ul>
+                  </div>
+                </div>
               </div>
               <div className="image">
                 <img id="fileInput1" onClick={() => {
                   handleImageClick(fileInput2)
-                }} src="https://i.pinimg.com/736x/c2/4b/1b/c24b1b82d55a08a71818726c618b9740.jpg" alt="" srcset="" />
+                }} src={CoverImage != '' ? CoverImage : "https://i.pinimg.com/736x/c2/4b/1b/c24b1b82d55a08a71818726c618b9740.jpg"} alt="" srcSet="" />
                 <input
                   type="file"
                   ref={fileInput2}

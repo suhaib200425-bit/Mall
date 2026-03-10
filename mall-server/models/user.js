@@ -27,6 +27,10 @@ const userSchema = new mongoose.Schema(
             type: String,
             enum: ["user", "owner", "admin"],
             default: "user"
+        },
+        category: {
+            type: String,
+            default: ""
         }
     },
     {
