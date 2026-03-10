@@ -1,11 +1,12 @@
 import axios from "axios";
+import { API_END_POINT } from "../../assets/main";
 
 export const loginUser = async (email,password) => {
 
     try {
 
         const response = await axios.post(
-            "http://localhost:5000/api/user/login",
+            `${API_END_POINT}/api/user/login`,
             {email,password}
         );
 
@@ -31,7 +32,7 @@ export const registerUser = async (formData) => {
     try {
 
         const response = await axios.post(
-            "http://localhost:5000/api/user/register",
+            `${API_END_POINT}/api/user/register`,
             formData,
             {
                 headers: {

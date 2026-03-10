@@ -20,3 +20,5 @@ export const categories = [
   "Jewellery",
   "Other"
 ];
+
+export const API_END_POINT ='https://mall-b9oz-dcv4bckam-suhaibs-projects-9984309f.vercel.app/'
