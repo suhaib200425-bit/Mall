@@ -21,5 +21,5 @@ export const categories = [
   "Other"
 ];
 
-export const API_END_POINT ='https://mall-b9oz.vercel.app'
-// export const API_END_POINT ='http://localhost:5000'
+// export const API_END_POINT ='https://mall-b9oz.vercel.app'
+export const API_END_POINT ='http://localhost:5000'

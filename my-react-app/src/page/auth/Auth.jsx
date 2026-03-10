@@ -81,6 +81,8 @@ function Auth() {
       console.log('LOGIN');
 
       if (result.status) {
+        localStorage.setItem('token',result.token)
+        Navigate('/home')
         setFormdata({
           firstName: '',
           lastName: '',

@@ -9,6 +9,9 @@ const loginUser = async (req, res) => {
  console.log(req.body);
     const { email, password } = req.body
  
+    if(!email || !password){
+      return res.json({status: false, message: 'All filed Is requird'})
+    }
     const user = await User.findOne({ email })
 
     if (!user) {
@@ -36,7 +39,8 @@ const loginUser = async (req, res) => {
     res.json({
       status: true,
       message: "Login success",
-      token
+      token,
+      user
     })
 
   } catch (error) {
