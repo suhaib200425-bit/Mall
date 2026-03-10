@@ -1,6 +1,6 @@
 const express = require("express")
 const upload = require("../middleware/multer")
-const { registerUser, loginUser } = require("../controllers")
+const { registerUser, loginUser, getCompany } = require("../controllers")
 const router = express.Router()
 
 router.post(
@@ -15,6 +15,11 @@ router.post(
 router.post(
    "/login",
    loginUser
+)
+
+router.get(
+   "/company",
+   getCompany
 )
 
 router.get("/",(req,res)=>{

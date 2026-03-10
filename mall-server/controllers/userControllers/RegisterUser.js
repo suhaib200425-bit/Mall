@@ -33,11 +33,11 @@ console.log(req.body);
         const hashedPassword = await bcrypt.hash(password, 10)
 
         const profilePic = req.files.profilePic
-            ? req.files.profilePic[0].filename
+            ? `/uploads/${req.files.profilePic[0].filename}`
             : ""
 
         const coverPic = req.files.coverPic
-            ? req.files.coverPic[0].filename
+            ? `/uploads/${req.files.coverPic[0].filename}`
             : ""
 
         const user = new User({

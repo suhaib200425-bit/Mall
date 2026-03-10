@@ -4,12 +4,15 @@ import "./Auth.css";
 import axios from 'axios'
 import { categories } from "../../assets/main";
 import { loginUser, registerUser } from "./AuthFun";
+import { toast } from "react-toastify";
+import { useMall } from "../../Context/MallContext";
 function Auth() {
 
   const [page, setPage] = useState(true)
   const [usertype, setUsertype] = useState('User')
   const [CoverImage, setCoverImage] = useState('')
   const [ProfileLogo, seProfileLogo] = useState('')
+  const {setUser}=useMall()
   const [Formdata, setFormdata] = useState({
     firstName: '',
     lastName: '',
@@ -81,7 +84,10 @@ function Auth() {
       console.log('LOGIN');
 
       if (result.status) {
+        toast.dismiss(); // remove old toast
+        toast.success(result.message);
         localStorage.setItem('token',result.token)
+        setUser(result.user)
         Navigate('/home')
         setFormdata({
           firstName: '',
@@ -92,12 +98,17 @@ function Auth() {
           role: 'owner',
           category: '',
         })
+      }else{
+        toast.dismiss(); // remove old toast
+        toast.error(result.message);
       }
     }
     if (!page) {
       result = await registerUser(formData)
       console.log('REGISTER');
       if (result.status) {
+        toast.dismiss(); // remove old toast
+        toast.success(result.message);
         setFormdata({
           firstName: '',
           lastName: '',
@@ -107,6 +118,10 @@ function Auth() {
           role: 'owner',
           category: '',
         })
+        setPage(true)
+      }else{
+        toast.dismiss(); // remove old toast
+        toast.error(result.message);
       }
     }
     console.log(result)

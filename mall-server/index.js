@@ -9,6 +9,9 @@ app.use(express.json())
 app.use(cors({
   origin: "*",
 }));
+//IMAGE
+app.use('/uploads', express.static('uploads'));
+
 //DATABASE CONNECTED
 connectDB()
 

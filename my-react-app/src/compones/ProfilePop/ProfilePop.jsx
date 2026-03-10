@@ -1,19 +1,31 @@
 import React from 'react'
 import './ProfilePop.css'
 import { ProfilePic } from '../../assets/assets'
-function ProfilePop() {
+import { useNavigate } from 'react-router-dom'
+import { useMall } from '../../Context/MallContext'
+import { API_END_POINT } from '../../assets/main'
+function ProfilePop({ setpop }) {
+    const Navigate = useNavigate()
+    const { user } = useMall()
     return (
         <div className='ProfilePop'>
-            <div className="ProfileBox">
-                <img src={ProfilePic} alt="" />
-                <h5>Suhaib koppath</h5>
-            </div>
+            {
+                user &&
+                <div className="ProfileBox">
+                    <img src={user.profilePic ? `${API_END_POINT}${user.profilePic}` : ProfilePic} alt="" />
+                    <h5>{user.name}</h5>
+                </div>
+            }
             <div className="otherOtion">
 
                 <div className="Orders">
                     <h5>Orders</h5>
                 </div>
-                <div className="logOut">
+                <div className="logOut" onClick={() => {
+                    localStorage.setItem("token", "null")
+                    Navigate('/')
+                    setpop(false)
+                }}>
                     <h5>Logout</h5>
                 </div>
             </div>

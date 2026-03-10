@@ -4,9 +4,19 @@ import TabBar from '../../compones/TabBar/TabBAr';
 import Store from '../../compones/Store/Store';
 import Slider from '../../compones/Slider/Slider';
 import { stores } from '../../assets/assets';
+import { getCompanys } from './Company';
 function Home() {
     const [Active, setActive] = useState('All')
-
+    const [Companys, setCompanys] = useState([])
+    useEffect(() => {
+        const getData = async () => {
+            const result = await getCompanys()
+            if (result.status) {
+                setCompanys(result.companys)
+            }
+        }
+        getData()
+    }, [])
     return (
         <div className='Home'>
             {/* <LeftBar /> */}
@@ -18,8 +28,8 @@ function Home() {
                 <TabBar Active={Active} setActive={setActive} />
                 <div className="row Stores">
                     {
-                        stores.map(elem => {
-                            return <div className="col-6 col-md-3 p-1" key={elem.Id}>
+                        Companys&&Companys.map(elem => {
+                            return <div className="col-6 col-md-3 p-1" key={elem._id}>
                                 <Store StoreObj={elem} />
                             </div>
                         })
