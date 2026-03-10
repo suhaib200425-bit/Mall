@@ -78,10 +78,36 @@ function Auth() {
     let result
     if (page)
       result = await loginUser(Formdata.emailId, Formdata.password)
-    else {
+      console.log('LOGIN');
+      
+    if (result.status) {
+      setFormdata({
+        firstName: '',
+        lastName: '',
+        emailId: '',
+        password: '',
+        confirmPassword: '',
+        role: 'owner',
+        category: '',
+      })
+    }
+    if(!page) {
       result = await registerUser(formData)
+      console.log('REGISTER');
+      if (result.status) {
+        setFormdata({
+          firstName: '',
+          lastName: '',
+          emailId: '',
+          password: '',
+          confirmPassword: '',
+          role: 'owner',
+          category: '',
+        })
+      }
     }
     console.log(result)
+
     // Navigate('/home')
   }
 
