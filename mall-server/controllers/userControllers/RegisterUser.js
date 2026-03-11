@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt")
 const registerUser = async (req, res) => {
 
     try {
+        console.log(req.files);
+        
 
         const { name, email, password, confirmPassword, role, category } = req.body
         console.log(req.body);
@@ -32,8 +34,8 @@ const registerUser = async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10)
 
-        const profilePic = req.files["profilePic"] ? req.files["profilePic"][0].path : null;
-        const coverPic = req.files["coverPic"] ? req.files["coverPic"][0].path : null;
+        const profilePic = req.files["profilePic"] ? req.files["profilePic"][0].secure_url : null;
+        const coverPic = req.files["coverPic"] ? req.files["coverPic"][0].secure_url : null;
 
         const user = new User({
             name,
