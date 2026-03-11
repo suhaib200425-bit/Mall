@@ -1,6 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const connectDB = require("./config/db")
+const User =require('./models/user')
 require("dotenv").config();
 const app = express()
 
@@ -18,8 +19,12 @@ connectDB()
 //API END POINTS
 app.use('/api/user',require('./routes/userRouters'))
 
-app.get("/",(req,res)=>{
-    res.send("API Working")
+app.get("/",async (req,res)=>{
+    const data= await User.find()
+    res.json({
+        message:"API Working",
+        data
+    })
 })
 
 app.listen(5000,()=>{
