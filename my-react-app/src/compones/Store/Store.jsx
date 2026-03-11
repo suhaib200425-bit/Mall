@@ -7,7 +7,7 @@ function Store({StoreObj}) {
   return (
     <div className='Store' onClick={()=>{
         window.scrollTo(0,0)
-        // Navigate(`/shope/category`)
+        Navigate(`/shope/${StoreObj.category}`)
     }}>
         <img onClick={()=>{
             console.log(StoreObj.coverPic);

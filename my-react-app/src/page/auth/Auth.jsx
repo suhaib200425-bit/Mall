@@ -7,12 +7,12 @@ import { loginUser, registerUser } from "./AuthFun";
 import { toast } from "react-toastify";
 import { useMall } from "../../Context/MallContext";
 function Auth() {
-
+  const [loading, setloading] = useState(false)
   const [page, setPage] = useState(true)
   const [usertype, setUsertype] = useState('User')
   const [CoverImage, setCoverImage] = useState('')
   const [ProfileLogo, seProfileLogo] = useState('')
-  const {setUser}=useMall()
+  const { setUser } = useMall()
   const [Formdata, setFormdata] = useState({
     firstName: '',
     lastName: '',
@@ -55,7 +55,9 @@ function Auth() {
   };
 
   const handleSubmit = async (e) => {
-
+    setloading(true)
+    console.log('loading');
+    console.log(loading);
     e.preventDefault(); // form reload stop cheyyum
     console.log("Form submitted");
     const formData = new FormData()
@@ -86,7 +88,7 @@ function Auth() {
       if (result.status) {
         toast.dismiss(); // remove old toast
         toast.success(result.message);
-        localStorage.setItem('token',result.token)
+        localStorage.setItem('token', result.token)
         setUser(result.user)
         Navigate('/home')
         setFormdata({
@@ -98,7 +100,7 @@ function Auth() {
           role: 'owner',
           category: '',
         })
-      }else{
+      } else {
         toast.dismiss(); // remove old toast
         toast.error(result.message);
       }
@@ -119,14 +121,15 @@ function Auth() {
           category: '',
         })
         setPage(true)
-      }else{
+        usertype('')
+      } else {
         toast.dismiss(); // remove old toast
         toast.error(result.message);
       }
     }
     console.log(result)
-
     // Navigate('/home')
+    setloading(false)
   }
 
 
@@ -138,7 +141,12 @@ function Auth() {
     <div className="signup-container">
       <div className="signup-card">
 
-        <form className="signup-left" onSubmit={handleSubmit}>
+        <form className="signup-left" onSubmit={(e) => {
+            e.preventDefault()
+          if (!loading) {
+            handleSubmit(e)
+          }
+        }}>
 
           {
             !page && <div className="nav">
@@ -186,6 +194,7 @@ function Auth() {
                 role: 'user',
                 Category: ''
               })
+              setloading(false)
             }}>{page ? 'Create' : 'Log In'}</span>
           </p>
 
@@ -209,11 +218,22 @@ function Auth() {
 
             {!page && <input value={Formdata.confirmPassword} required onChange={(e) => { handleChange(e) }} name="confirmPassword" type="password" placeholder="Confirm Password" />}
 
-            <div className="buttons" onClick={handleSubmit}>
-              <button className={usertype == 'User' ? "create col-12" : "create topcreatebtn col-12"}>
-                {
-                  page ? 'Login' : 'Create account'
+            <div className="buttons" >
+              <button onClick={(e) => {
+            e.preventDefault()
+                if (!loading) {
+                  handleSubmit(e)
                 }
+              }} className={usertype == 'User' ? "create col-12" : "create topcreatebtn col-12"}>
+                {
+              !loading ?
+                <>
+                  {
+                    page ? 'Login' : 'Create account'
+                  }
+                </> :
+                <div class="loader"></div>
+            }
               </button>
             </div>
             <hr />
@@ -241,7 +261,7 @@ function Auth() {
           backdropFilter: usertype === 'User' ? 'blur(10px)' : 'none'
         }}>
           {
-            usertype != 'User' &&
+            usertype == 'Business' &&
             <>
               <div className="logobox">
                 <div className="logo">
@@ -289,10 +309,21 @@ function Auth() {
               </div></>
           }
         </div>
-        <div className="buttons" onClick={handleSubmit}>
-          <button className="create bottomcreatebtn col-11 mb-5 ms-2 me-2" style={{ display: usertype == 'User' ? 'none' : '' }}>
+        <div className="buttons" >
+          <button onClick={(e) => {
+            e.preventDefault()
+            if (!loading) {
+              handleSubmit(e)
+            }
+          }} className="create bottomcreatebtn col-11 mb-5 ms-2 me-2" style={{ display: usertype == 'User' ? 'none' : '' }}>
             {
-              page ? 'Login' : 'Create account'
+              !loading ?
+                <>
+                  {
+                    page ? 'Login' : 'Create account'
+                  }
+                </> :
+                <div class="loader"></div>
             }
           </button>
         </div>

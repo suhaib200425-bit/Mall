@@ -108,7 +108,11 @@ input {
   gap: 5px;
   flex-direction: column;
 }
-
+.buttons .create{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .signup-right .logobox {
   width: 80%;
   display: flex;
@@ -255,4 +259,19 @@ button i {
   .topcreatebtn{
     display: none;
   }
+}
+
+
+.loader {
+ border: 5px solid #ffffff; /* Light grey background */
+ border-top: 5px solid #000000; /* Blue spinner */
+ border-radius: 50%;
+ width: 20px;
+ height: 20px;
+ animation: spin 2s linear infinite;
+ background: transparent;
+}
+@keyframes spin {
+ 0% { transform: rotate(0deg); }
+ 100% { transform: rotate(360deg); }
 }

@@ -43,7 +43,8 @@ const registerUser = async (req, res) => {
             password: hashedPassword,
             profilePic,
             coverPic,
-            role: role || 'user'
+            role: role || 'user',
+            category
         })
 
         await user.save()

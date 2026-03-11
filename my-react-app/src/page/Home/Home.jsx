@@ -3,20 +3,10 @@ import './Home.css'
 import TabBar from '../../compones/TabBar/TabBAr';
 import Store from '../../compones/Store/Store';
 import Slider from '../../compones/Slider/Slider';
-import { stores } from '../../assets/assets';
-import { getCompanys } from './Company';
+import { useMall } from '../../Context/MallContext';
 function Home() {
-    const [Active, setActive] = useState('All')
-    const [Companys, setCompanys] = useState([])
-    useEffect(() => {
-        const getData = async () => {
-            const result = await getCompanys()
-            if (result.status) {
-                setCompanys(result.companys)
-            }
-        }
-        getData()
-    }, [])
+    const [Active, setActive] = useState(null)
+    const {Companys,setCompanys}=useMall()
     return (
         <div className='Home'>
             {/* <LeftBar /> */}
