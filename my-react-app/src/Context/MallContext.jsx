@@ -14,6 +14,8 @@ export const AppProvider = ({ children }) => {
 
             const response = await axios.get(`${API_END_POINT}`)
             console.log(response.data);
+            console.log(API_END_POINT);
+            
 
         }
         apiworking()
