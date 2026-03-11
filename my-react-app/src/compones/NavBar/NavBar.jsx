@@ -41,7 +41,7 @@ function NavBar() {
                     e.stopPropagation()
                     console.log(`${API_END_POINT}${user.profilePic}`);
                     setpop(prev => !prev)
-                }} style={{ backgroundImage: `url(${user.profilePic?`${API_END_POINT}${user.profilePic}`:ProfilePic})` }}></div>
+                }} style={{ backgroundImage: `url(${user.profilePic?user.profilePic:ProfilePic})` }}></div>
             </div>
             {pop &&
                 <div className="NavProfile">

@@ -14,6 +14,10 @@
     border-radius: 10px;
 }
 .storeName{
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
     font-size: 20px;
     font-weight: 700;
 }

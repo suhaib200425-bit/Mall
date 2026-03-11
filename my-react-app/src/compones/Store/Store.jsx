@@ -9,7 +9,7 @@ function Store({StoreObj}) {
         window.scrollTo(0,0)
         Navigate(`/shope/category`)
     }}>
-        <img src={StoreObj.coverPic?`${API_END_POINT}${StoreObj?.coverPic}`:''} alt="" srcset="" />
+        <img src={StoreObj.coverPic?StoreObj?.coverPic:''} alt="" srcset="" />
         <div className="storeName">
             {StoreObj?.name}
             <br />

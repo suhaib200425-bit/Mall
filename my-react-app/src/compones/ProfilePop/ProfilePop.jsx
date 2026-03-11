@@ -12,7 +12,7 @@ function ProfilePop({ setpop }) {
             {
                 user &&
                 <div className="ProfileBox">
-                    <img src={user.profilePic ? `${API_END_POINT}${user.profilePic}` : ProfilePic} alt="" />
+                    <img src={user.profilePic ? user.profilePic : ProfilePic} alt="" />
                     <h5>{user.name}</h5>
                 </div>
             }

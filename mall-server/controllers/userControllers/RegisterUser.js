@@ -6,7 +6,7 @@ const registerUser = async (req, res) => {
     try {
 
         const { name, email, password, confirmPassword, role, category } = req.body
-console.log(req.body);
+        console.log(req.body);
 
         if (!name || !email || !password || !confirmPassword || !role) {
             return res.json({ status: false, message: "All filed Is requird" })
@@ -32,13 +32,8 @@ console.log(req.body);
 
         const hashedPassword = await bcrypt.hash(password, 10)
 
-        const profilePic = req.files.profilePic
-            ? `/uploads/${req.files.profilePic[0].filename}`
-            : ""
-
-        const coverPic = req.files.coverPic
-            ? `/uploads/${req.files.coverPic[0].filename}`
-            : ""
+        const profilePic = req.files["profilePic"] ? req.files["profilePic"][0].path : null;
+        const coverPic = req.files["coverPic"] ? req.files["coverPic"][0].path : null;
 
         const user = new User({
             name,
