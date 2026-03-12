@@ -3,7 +3,7 @@ import './Nesto.css'
 import '../../compones/TabBar/TabBAr'
 import TabBar from '../../compones/TabBar/TabBAr';
 
-import {listShopes, Offer} from '../../assets/assets'
+import {listShopes, Nestoimage, Offer} from '../../assets/assets'
 import GroceryCard from '../../compones/GroceryCard/GroceryCard';
 function Nesto() {
     const [Active, setActive] = useState('All')
@@ -11,8 +11,9 @@ function Nesto() {
     return (
         <div className='Nesto'>
             <div class="NestoBanner">
-                <img src="https://i.ytimg.com/vi/ka5Nd12JgG0/maxresdefault.jpg" alt="image" />
+                <img src={Nestoimage} alt="image" />
                 <div class="bottomShade"></div>
+                <button className="editingBtn">Edit</button>
             </div>
             <div className="NestoContent ">
                 <div className="col-12  CardsItems">

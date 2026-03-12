@@ -11,12 +11,14 @@ import Banner4 from '../assets/Banner4.jpg'
 import Banner5 from '../assets/Banner5.jpg'
 //STORES
 import Nesto from '../assets/Nesto.png'
+const  Nestoimage=Nesto
 export {
     Logo,
     ProfilePic,
     SuperMarket,
     Accessories,
     BeautyCosmetics,
+    Nestoimage
 }
 
 export const Banners = [

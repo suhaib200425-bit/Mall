@@ -8,6 +8,7 @@
     border: 1px solid black;
     overflow: hidden;
     padding: 10px;
+    position: relative;
 }
 .Store img{
     height: 150px;
@@ -25,6 +26,8 @@
 .StoreFloor{
     font-size: 17px;
 }
+
+
 @media (max-width:576px) {
     .Store img{
         height: 100px;

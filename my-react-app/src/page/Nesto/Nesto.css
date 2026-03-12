@@ -1,11 +1,11 @@
 .Nesto {
+    padding-top: 60px;
     display: flex;
     min-height: 100dvh;
     flex-direction: column;
 }
 
 .NestoBanner {
-    padding-top: 60px;
     position: relative;
     width: 100%;
     height: 80vh;

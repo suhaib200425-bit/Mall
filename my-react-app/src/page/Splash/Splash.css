@@ -1,0 +1,26 @@
+.Splash {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    flex-direction: column;
+}
+
+.Splash img {
+    height: 50%;
+}
+
+.Splash .loader {
+    border-top: 5px solid #ffffff;
+    /* Light grey background */
+    border: 5px solid #000000;
+    /* Blue spinner */
+    border-radius: 50%;
+    width: 50px !important;
+    height: 50px !important;
+    animation: spin 2s linear infinite;
+    background: transparent;
+}
+

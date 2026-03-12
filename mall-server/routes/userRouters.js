@@ -1,6 +1,7 @@
 const express = require("express")
 const upload = require("../middleware/multer")
-const { registerUser, loginUser, getCompany, getCategorys, getCategoryCompanys } = require("../controllers")
+const { registerUser, loginUser, getCompany, getCategorys, getCategoryCompanys, loggedUser } = require("../controllers")
+const verifyToken = require("../middleware/jwt")
 const router = express.Router()
 
 router.post(
@@ -32,8 +33,15 @@ router.get(
    getCategoryCompanys
 )
 
-router.get("/",(req,res)=>{
-    res.send("USER API Working")
+
+router.get(
+   "/logged",
+   verifyToken,
+   loggedUser
+)
+
+router.get("/", (req, res) => {
+   res.send("USER API Working")
 })
 
 module.exports = router
