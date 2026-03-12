@@ -5,6 +5,7 @@ import axios from "axios"
 import { API_END_POINT } from '../../assets/main'
 import { useMall } from '../../Context/MallContext'
 import { useNavigate } from 'react-router-dom'
+import { toast } from "react-toastify";
 function Splash() {
     const token = localStorage.getItem('token')
     const { setUser } = useMall()
@@ -20,12 +21,14 @@ function Splash() {
             })
             console.log(response.data);
             if (response.data.status) {
+                toast.success(response.data.message)
                 const user = response.data.user
                 setUser(user)
                 Navigate('/home')
+            }else{
+                Navigate('/home')
+                toast.error(response.data.message)
             }
-
-
 
         }
         checklogged()

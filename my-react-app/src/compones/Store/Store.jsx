@@ -14,7 +14,7 @@ function Store({ StoreObj }) {
             <img onClick={() => {
                 console.log(StoreObj.coverPic);
 
-            }} src={StoreObj.coverPic ? StoreObj?.coverPic : ''} alt="" srcset="" />
+            }} src={StoreObj.coverPic ? StoreObj.coverPic : ''} alt="" srcset="" />
             <div className="storeName">
                 {StoreObj?.name}
                 <br />

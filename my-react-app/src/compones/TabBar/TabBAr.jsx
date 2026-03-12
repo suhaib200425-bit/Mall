@@ -16,7 +16,7 @@ function TabBar({ setActive, Active, style }) {
         }
         const GetAllCompanys = async () => {
             const result = await axios.get(`${API_END_POINT}/api/user/company`)
-            console.log(result.data.companys);
+            console.log(result.data);
             setCompanys(result.data.companys)
         }
         if (Active) {
