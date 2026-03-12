@@ -11,11 +11,11 @@ export const AppProvider = ({ children }) => {
     const [Categorys, setCategorys] = useState([])
 
     useEffect(() => {
-        Promise.allSettled([ Apiworking(),getCompanys(),getCategorys()])
+        Promise.allSettled([ Apiworking(),getCategorys()])
             .then((data) => {
                 console.log('PROMISE');
-                setCompanys(data[1].value.companys)
-                setCategorys(data[2].value.categorys)
+                // setCompanys(data[1].value.companys)
+                setCategorys(data[1].value.categorys)
                 console.log(data);
                 console.log('PROMISE END');
             })
@@ -45,21 +45,21 @@ export const AppProvider = ({ children }) => {
         }
     }
 
-    async function getCompanys(page = 1) {
-        try {
-            const response = await axios.get(
-                `${API_END_POINT}/api/user/company?page=${page}`
-            );
+    // async function getCompanys(page = 1) {
+    //     try {
+    //         const response = await axios.get(
+    //             `${API_END_POINT}/api/user/company?page=${page}`
+    //         );
 
-            return response.data;
+    //         return response.data;
 
-        } catch (error) {
-            return {
-                status: false,
-                message: error.response?.data?.message || error.message
-            };
-        }
-    };
+    //     } catch (error) {
+    //         return {
+    //             status: false,
+    //             message: error.response?.data?.message || error.message
+    //         };
+    //     }
+    // };
 
     return (
         <AppContext.Provider value={{

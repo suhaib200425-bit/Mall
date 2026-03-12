@@ -22,16 +22,10 @@ function Splash() {
             if (response.data.status) {
                 const user = response.data.user
                 setUser(user)
-                if (user.role != 'user') {
-                    Navigate('/auth')
-                }else{
-                     Navigate('/home')
-                }
-            }else{
-                 Navigate('/home')
+                Navigate('/home')
             }
 
-           
+
 
         }
         checklogged()
