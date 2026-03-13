@@ -5,7 +5,7 @@ const bannerChanges = async (req, res) => {
 
     const { main } = req.query;
     const userId = req.user.id
-    const banner = req.file ? req.file.path : null; // multer/cloudinary use cheyyumbo
+    const banner = req.file ? req.file.secure_url : null; // multer/cloudinary use cheyyumbo
 
     if (!userId) {
       return res.json({

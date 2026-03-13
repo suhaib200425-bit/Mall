@@ -1,4 +1,5 @@
 const { bannerChanges } = require('./bannerControllers/CU-Banner');
+const { getBanner } = require('./bannerControllers/GetBanner');
 const getCategorys = require('./userControllers/GetCategory');
 const getCategoryCompanys = require('./userControllers/GetCategoryCompany');
 const getCompany = require('./userControllers/GetCompany ');
@@ -18,5 +19,6 @@ module.exports= {
     loggedUser,
     updateCoverPic,
     //BANNER MODEL RELATED
-    bannerChanges
+    bannerChanges,
+    getBanner
 }

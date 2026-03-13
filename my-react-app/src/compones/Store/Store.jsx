@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Store.css'
 import { useNavigate } from 'react-router-dom'
 import { API_END_POINT } from '../../assets/main'
 import { useMall } from '../../Context/MallContext'
 import BannerPop from '../BannerPop/BannerPop'
+import axios from 'axios'
 function Store({ StoreObj }) {
     const [Edit,setEdit]=useState(false)
     const { user } = useMall()
     const Navigate = useNavigate()
 
+   
     return (
         <div className='Store' onClick={() => {
             window.scrollTo(0, 0)
