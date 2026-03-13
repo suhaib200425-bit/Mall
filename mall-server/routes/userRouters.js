@@ -1,8 +1,13 @@
 const express = require("express")
 const upload = require("../middleware/multer")
-const { registerUser, loginUser, getCompany, getCategorys, getCategoryCompanys, loggedUser } = require("../controllers")
+const { registerUser, loginUser, getCompany, getCategorys, getCategoryCompanys, loggedUser, updateCoverPic } = require("../controllers")
 const verifyToken = require("../middleware/jwt")
 const router = express.Router()
+
+
+router.get("/", (req, res) => {
+   res.send("USER API Working")
+})
 
 router.post(
    "/register",
@@ -40,8 +45,6 @@ router.get(
    loggedUser
 )
 
-router.get("/", (req, res) => {
-   res.send("USER API Working")
-})
+router.put("/update-cover", verifyToken, upload.single("coverPic"), updateCoverPic);
 
 module.exports = router
