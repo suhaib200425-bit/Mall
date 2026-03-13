@@ -24,3 +24,12 @@
     background: transparent;
 }
 
+
+@media (max-width:576px) {
+
+
+    .Splash img {
+        width: 90%;
+        height: auto;
+    }
+}

@@ -11,9 +11,9 @@ export const AppProvider = ({ children }) => {
     const [Categorys, setCategorys] = useState([])
 
     useEffect(() => {
-        Promise.allSettled([ Apiworking(),getCategorys()])
+        Promise.allSettled([Apiworking(), getCategorys()])
             .then((data) => {
-            
+
                 console.log('PROMISE');
                 // setCompanys(data[1].value.companys)
                 setCategorys(data[1].value.categorys)
@@ -37,7 +37,7 @@ export const AppProvider = ({ children }) => {
     async function Apiworking() {
         try {
             const response = await axios.get(`${API_END_POINT}`)
-            
+
             alert(response.data.message)
             return response.data;
 

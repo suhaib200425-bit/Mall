@@ -2,10 +2,12 @@ import { useRef, useState } from "react";
 import './BannerPop.css'
 import { API_END_POINT } from "../../assets/main";
 import axios from "axios";
-function BannerPop({ setEdit, companyimage }) {
+import { useMall } from "../../Context/MallContext";
+function BannerPop({ setEdit, id, companyimage }) {
     const token = localStorage.getItem('token')
     const [file, setFile] = useState(null);
     const [image, setImage] = useState(companyimage);
+    const { setCompanys } = useMall()
     const inputRef = useRef()
     const handleclick = (e) => {
         e.stopPropagation();
@@ -13,7 +15,7 @@ function BannerPop({ setEdit, companyimage }) {
         uploadBanner(file, "USER_ID_HERE", true);
     };
     const handleSubmit = async (e) => {
-        
+
         e.preventDefault()
         try {
 
@@ -31,7 +33,22 @@ function BannerPop({ setEdit, companyimage }) {
                     }
                 }
             );
-
+            if (res.data.status) {
+                setCompanys(prev => {
+                    const company = prev.map(elem => {
+                        if (elem._id == id) {
+                            return {
+                                ...elem,
+                                coverPic: image
+                            }
+                        } else {
+                            return elem
+                        }
+                    })
+                    return company
+                });
+            }
+            setEdit(false)
             console.log(res.data);
 
         } catch (error) {
