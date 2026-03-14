@@ -77,6 +77,16 @@ const AddProduct = ({ setProducts }) => {
         if (res.data.status) {
           toast.success(res.data.message)
           setProducts(prev => [res.data.product, ...prev])
+          setProductData(
+            {
+              productName: "",
+              rate: "",
+              offerRate: "",
+              per: "",
+              category: "",
+              image: null,
+            }
+          )
         } else {
           toast.error(res.data.message)
         }
