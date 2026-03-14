@@ -13,7 +13,7 @@ const productSchema = new mongoose.Schema(
       required: true,
       trim: true
     },
-    
+
     per: {
       type: String,
       required: true,
@@ -31,13 +31,14 @@ const productSchema = new mongoose.Schema(
       required: true,
       min: 0
     },
-
+    
     offerRate: {
       type: Number,
-      required: true,
       min: 0,
+      default: null,
       validate: {
         validator: function (value) {
+          if (value == null) return true;
           return value <= this.rate;
         },
         message: "Offer rate cannot be greater than rate"

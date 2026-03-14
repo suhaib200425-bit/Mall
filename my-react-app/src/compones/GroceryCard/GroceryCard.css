@@ -81,6 +81,8 @@
 
 .btnscart .Plus,
 .btnscart .minus,
+.btnscart .delete,
+.btnscart .update,
 .btnscart .number {
     cursor: pointer;
     width: 30px;
@@ -91,6 +93,12 @@
     align-items: center;
     justify-content: center;
 
+}
+
+.btnscart .delete,
+.btnscart .update{
+    width: 40px;
+    height: 40px;
 }
 
 .btnscart .minus,

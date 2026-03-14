@@ -32,7 +32,7 @@ const getProducts = async (req, res) => {
         const totalProducts = await Product.countDocuments(filter);
 
         const products = await Product.find(filter)
-            .populate("companyId", "name email category")
+            // .populate("companyId", "name email category")
             .sort({ createdAt: -1 })
             .skip(skip)
             .limit(limit);

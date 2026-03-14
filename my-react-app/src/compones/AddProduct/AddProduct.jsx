@@ -10,7 +10,7 @@ const AddProduct = ({ setProducts }) => {
   const [productData, setProductData] = useState({
     productName: "",
     rate: "",
-    offerRate: "",
+    offerRate: null,
     per: "",
     category: "",
     image: null,
@@ -60,7 +60,8 @@ const AddProduct = ({ setProducts }) => {
     const formData = new FormData();
     formData.append("productName", productData.productName);
     formData.append("rate", productData.rate);
-    formData.append("offerRate", productData.offerRate);
+    if (productData.offerRate)
+      formData.append("offerRate", productData.offerRate);
     formData.append("categoryName", productData.category);
     formData.append("image", productData.image);
     formData.append("per", productData.per);
@@ -69,7 +70,8 @@ const AddProduct = ({ setProducts }) => {
 
     axios.post(`${API_END_POINT}/api/product/save`, formData, {
       headers: {
-        Authorization: token,
+        "Content-Type": "multipart/form-data",
+        Authorization: token
       },
     })
       .then((res) => {
@@ -81,7 +83,7 @@ const AddProduct = ({ setProducts }) => {
             {
               productName: "",
               rate: "",
-              offerRate: "",
+              offerRate: null,
               per: "",
               category: "",
               image: null,
@@ -167,7 +169,7 @@ const AddProduct = ({ setProducts }) => {
                 placeholder="Enter offer rate"
                 value={productData.offerRate}
                 onChange={handleChange}
-                
+
               />
             </div>
           </div>
