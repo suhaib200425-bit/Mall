@@ -5,7 +5,7 @@ const addProduct = async (req, res) => {
         const { productName, categoryName, per, rate, offerRate } = req.body;
         const companyId = req.user.id
         // validation
-        if (!productName || !categoryName || !per || !companyId || !rate || !offerRate) {
+        if (!productName || !categoryName || !per || !companyId || !rate ) {
             return res.json({
                 status: false,
                 message: "All fields are required"
@@ -26,7 +26,7 @@ const addProduct = async (req, res) => {
             per,
             companyId,
             rate,
-            offerRate,
+            offerRate:offerRate||null,
             image: req.file.secure_url // cloudinary url
         });
 
