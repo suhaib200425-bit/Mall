@@ -130,7 +130,16 @@
 
 }
 
-
+.AppProduct{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    background-color: black;
+    padding: 5px;
+}
 
 @media (max-width:576px) {
     .NestoBanner {

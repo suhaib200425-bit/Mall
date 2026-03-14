@@ -9,14 +9,43 @@ import axios from 'axios';
 import { API_END_POINT } from '../../assets/main';
 import { useParams } from 'react-router-dom';
 import { useMall } from '../../Context/MallContext';
+import AddProduct from '../../compones/AddProduct/AddProduct';
 function Nesto() {
+
     const { shope } = useParams()
+    const [Add, setAdd] = useState(false)
+    const [Products, setProducts] = useState([])
     const inputRef = useRef()
     const { user } = useMall()
     const [BannerImage, setBannerImage] = useState(null)
     const [BannerImageFile, setBannerImageFile] = useState(null)
     const [Active, setActive] = useState('All')
     const token = localStorage.getItem('token')
+    const getProductsApi = async (page = 1, limit = 8,categoryName = "", search = "") => {
+        try {
+            const res = await axios.get(`${API_END_POINT}/api/product/gets/${shope}`, {
+                params: {
+                    page,
+                    limit,
+                    categoryName,
+                    search,
+                },
+                headers: {
+                    Authorization: token
+                }
+            });
+            console.log(res.data);
+
+            return res.data;
+        } catch (error) {
+            console.log(error);
+            return {
+                status: false,
+                message: "Failed to fetch products",
+            };
+        }
+    };
+
     useEffect(() => {
         const getbanner = async () => {
             const response = await axios.get(`${API_END_POINT}/api/banner/get/${shope}`)
@@ -30,6 +59,13 @@ function Nesto() {
 
         }
         getbanner()
+        const products = async ()=>{
+            const result = await getProductsApi();
+            if(result.status){
+                setProducts(result.products)
+            }
+        }
+        products()
     }, [])
     const handleImage = async (e) => {
         const file = e.target.files[0]
@@ -43,9 +79,9 @@ function Nesto() {
         const result = await BannerUpdate(formData)
         if (result.status) {
             setBannerImage(result.data)
-        }else{
+        } else {
             console.log(result);
-            
+
         }
     };
 
@@ -100,10 +136,14 @@ function Nesto() {
                                 }
 
                             </ul>
+
                         </div>
+
                     </div>
                     {
-                        Offer.map((elem, index) => {
+                        Products&&Products.map((elem, index) => {
+                            console.log(elem);
+                            
                             return <div className="col-6 col-md-2 p-2 " key={index}>
                                 <GroceryCard Grocery={elem} index={index} />
 
@@ -112,8 +152,16 @@ function Nesto() {
                     }
 
 
+
                 </div>
+
             </div>
+            {
+                Add && <AddProduct setProducts={setProducts} />
+            }
+            {(user._id == shope) && <div className="AppProduct" onClick={() => {
+                setAdd(prev => !prev)
+            }}></div>}
         </div>
     )
 }

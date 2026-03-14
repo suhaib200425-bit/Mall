@@ -7,6 +7,7 @@ import { useMall } from '../../Context/MallContext';
 function Home() {
     const [Active, setActive] = useState(null)
     const {Companys,setCompanys}=useMall()
+    
     return (
         <div className='Home'>
             {/* <LeftBar /> */}

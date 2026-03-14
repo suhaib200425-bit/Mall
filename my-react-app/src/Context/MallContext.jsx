@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { API_END_POINT } from "../assets/main";
+import { toast } from "react-toastify";
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
@@ -9,8 +10,26 @@ export const AppProvider = ({ children }) => {
     const [cart, setCart] = useState({})
     const [Companys, setCompanys] = useState([])
     const [Categorys, setCategorys] = useState([])
-
+    const token = localStorage.getItem('token')
     useEffect(() => {
+
+        async function checklogged() {
+            const response = await axios.get(`${API_END_POINT}/api/user/logged`, {
+                headers: {
+                    Authorization: token
+                }
+            })
+            console.log('USER LOGGEd');
+            console.log(response.data);
+            if (response.data.status) {
+                toast.success(response.data.message)
+                setUser(response.data.user)
+            } else {
+                toast.error(response.data.message)
+            }
+
+        }
+        checklogged()
         Promise.allSettled([Apiworking(), getCategorys()])
             .then((data) => {
 

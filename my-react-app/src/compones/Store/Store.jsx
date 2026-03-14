@@ -5,6 +5,7 @@ import { API_END_POINT } from '../../assets/main'
 import { useMall } from '../../Context/MallContext'
 import BannerPop from '../BannerPop/BannerPop'
 import axios from 'axios'
+import AddProduct from '../AddProduct/AddProduct'
 function Store({ StoreObj }) {
     const [Edit,setEdit]=useState(false)
     const { user } = useMall()

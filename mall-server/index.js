@@ -19,6 +19,7 @@ connectDB()
 //API END POINTS
 app.use('/api/user',require('./routes/userRouters'))
 app.use('/api/banner',require('./routes/bannerRoutes'))
+app.use('/api/product',require('./routes/productRoutes'))
 
 app.get("/",async (req,res)=>{
     const data= await User.find()
