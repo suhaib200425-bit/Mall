@@ -64,7 +64,7 @@ function GroceryCard({ Grocery, index }) {
         }} >
             <div className="CardItem" id={Grocery._id} style={{ animationDelay: `${0.02}s` }} ref={boxRef}>
                 <img src={Grocery.image} alt="" srcset="" />
-                <h5>{Grocery.productName}</h5>
+                <h5 className='productName'>{Grocery.productName}</h5>
                 <div className="rateAndper col-8">
 
                     {Grocery.offerRate != null ?
