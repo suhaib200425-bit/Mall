@@ -167,7 +167,7 @@ const AddProduct = ({ setProducts }) => {
                 placeholder="Enter offer rate"
                 value={productData.offerRate}
                 onChange={handleChange}
-                required
+                
               />
             </div>
           </div>
