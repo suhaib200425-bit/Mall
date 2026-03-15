@@ -1,0 +1,27 @@
+.AlertPop{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    position:fixed;
+    top: 0;
+    flex-direction: column;
+    gap: 5px;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(245, 245, 245, 0.687);
+    
+}
+.AlertPop div{
+    padding: 5px 10px;
+    border-radius: 10px;
+    text-align: center;
+}
+.AlertPop .delete{
+    background-color: red;
+    color: white;
+}
+.AlertPop .Cancel{
+    background-color: white;
+    color: black;
+}

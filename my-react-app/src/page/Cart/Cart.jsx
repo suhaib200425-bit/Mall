@@ -2,54 +2,75 @@ import React, { useEffect, useState } from 'react'
 import './Cart.css'
 import { Offer } from '../../assets/assets';
 import { useMall } from '../../Context/MallContext';
+import axios from 'axios';
+import { API_END_POINT } from '../../assets/main';
 function Cart() {
-
+    const token = localStorage.getItem('token')
     const [products, setproducts] = useState();
     const { cart, setCart } = useMall()
-    const [ subtotal, setSubtotal ] = useState(0)
+    const [subtotal, setSubtotal] = useState(0)
 
     useEffect(() => {
-        const keys = Object.keys(cart)
-
-        const result = Offer.filter(product =>
-            keys.includes(product.id.toString())
-        )
-        //TOTAL
-        const total = result.reduce((sum, item) => {
-            const price=item.offerRate?item.offerRate:item.rate
-            return sum + (price*cart[item.id])
-        }, 0)
-        console.log(total+'SubTotal');
-        
-        setSubtotal(total)
-        console.log(result)
-        setproducts(result)
+        const cartList = Object.values(cart);
+        console.log(cartList);
+        setSubtotal(1000)
+        console.log(0)
+        setproducts(cartList)
     }, [])
 
-    const increase = (id,value) => {
-        setCart((prev) => {
-            setSubtotal(prev => prev + value)
-            const count = prev[id] || 0;
-            if (count === 0) {
-                return { ...prev, [id]: 1 }; // first add
-            } else {
-                return { ...prev, [id]: count + 1 }; // increase
+    const increase = async (id, value) => {
+        const response = await axios.get(`${API_END_POINT}/api/cart/add/${id}`, {
+            headers: {
+                Authorization: token
             }
         });
+        console.log(response.data);
+        if (response.data.status) {
+            setCart((prev) => {
+                return { ...prev, [id]: response.data.cart }; // first add
+            });
+            setproducts(prev => [...prev, response.data.cart])
+            const cartitem = response.data.cart
+            const filterproduct = products.map((elem) => {
+                if (elem._id == cartitem._id) {
+                    return cartitem
+                } else {
+                    return elem
+                }
+            })
+            setproducts(filterproduct)
+        }
     };
 
-    const decrease = (id, value) => {
-        setCart((prev) => {
-            const count = prev[id];
-            setSubtotal(prev => prev - value)
-            if (count === 1) {
-                const newCart = { ...prev };
-                delete newCart[id]; // remove item
-                return newCart;
+    const decrease = async (id, value) => {
+        const response = await axios.get(`${API_END_POINT}/api/cart/remove/${id}`, {
+            headers: {
+                Authorization: token
             }
-
-            return { ...prev, [id]: count - 1 };
         });
+        if (response.data.status && response.data.cart) {
+            setCart((prev) => {
+                return { ...prev, [id]: response.data.cart };
+            });
+            const filterproduct = products.map((elem) => {
+                if (elem._id == response.data.cart._id) {
+                    return response.data.cart
+                } else {
+
+                    return elem
+                }
+            })
+            setproducts(filterproduct)
+        }
+        if(!response.data.cart){
+             setCart((prev) => {
+                    const newCart = { ...prev };
+                    delete newCart[id]; // remove item
+                    return newCart;
+            });
+            const newArray = products.filter((item) => item.productId._id !== id);
+            setproducts(newArray)
+        }
     };
 
     const removeItem = (id) => {
@@ -61,8 +82,8 @@ function Cart() {
         return Math.round(((original - offer) / original) * 100) + '%';
     }
 
-    function rowWaystotal(id, rate) {
-        return cart[id] * rate
+    function rowWaystotal(id, rate, qty) {
+        return qty * rate
     }
     return (
         <div className='Cart' >
@@ -79,38 +100,38 @@ function Cart() {
 
                         {(products && products.length != 0) ? products.map(item => {
 
-                            return <div key={item.id} className="cart-item d-flex align-items-center justify-content-between">
+                            return <div key={item._id} className="cart-item d-flex align-items-center justify-content-between">
 
                                 <div className="Cart-box-item d-flex align-items-center gap-3">
 
-                                    <img src={item.image} className="cart-img" />
+                                    <img src={item?.productId?.image} className="cart-img" />
 
                                     <div>
-                                        <h6 className="mb-1">{item.title}</h6>
-                                        <small>{item.per} & {item.offerRate ? discountPercentage(item.rate, item.offerRate) : ''}</small>
+                                        <h6 className="mb-1">{item?.productId?.productName}</h6>
+                                        <small>{item?.productId?.per} / {item?.productId?.offerRate ? discountPercentage(item?.productId?.rate, item?.productId?.offerRate) : ''}</small>
                                     </div>
 
                                 </div>
 
                                 <div className="qty-box">
 
-                                    <button onClick={() => decrease(item.id, item.offerRate ? item.offerRate : item.rate)}>-</button>
-                                    <span>{cart[item.id]}</span>
-                                    <button onClick={() => increase(item.id, item.offerRate ? item.offerRate : item.rate)}>+</button>
+                                    <button onClick={() => decrease(item.productId._id, item?.productId?.offerRate ? item?.productId?.offerRate : item?.productId?.rate)}>-</button>
+                                    <span>{item.qty}</span>
+                                    <button onClick={() => increase(item.productId._id, item?.productId?.offerRate ? item?.productId?.offerRate : item?.productId?.rate)}>+</button>
 
                                 </div>
 
                                 <div>
-                                    {item.offerRate != null ?
-                                        <p>₹{rowWaystotal(item.id, item.offerRate)}/<span style={{ textDecoration: 'line-through' }}>₹{rowWaystotal(item.id, item.rate)}</span></p>
-                                        : <p>₹{rowWaystotal(item.id, item.rate)}/-</p>}
+                                    {item.productId.offerRate != null ?
+                                        <p>₹{rowWaystotal(item.productId._id, item?.productId?.offerRate, item.qty)}/<span style={{ textDecoration: 'line-through' }}>₹{rowWaystotal(item._id, item.productId.rate)}</span></p>
+                                        : <p>₹{rowWaystotal(item.productId._id, item.productId.rate, item.qty)}/-</p>}
 
                                 </div>
 
                                 <div>
                                     <button
                                         className="delete-btn"
-                                        onClick={() => removeItem(item.id)}
+                                        onClick={() => removeItem(item._id)}
                                     >
                                         🗑
                                     </button>
@@ -169,7 +190,7 @@ function Cart() {
 
                             <div className="d-flex justify-content-between fw-bold">
                                 <span>Total</span>
-                                <span>{subtotal+10}</span>
+                                <span>{subtotal + 10}</span>
                             </div>
 
                         </div>

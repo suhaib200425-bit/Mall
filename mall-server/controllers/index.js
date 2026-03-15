@@ -1,5 +1,8 @@
 const { bannerChanges } = require('./bannerControllers/CU-Banner');
 const { getBanner } = require('./bannerControllers/GetBanner');
+const addToCart = require('./CartControllers/AddToCart');
+const allCart = require('./CartControllers/allCarts');
+const { decreaseCartQty } = require('./CartControllers/decreaseCartQty ');
 const { getProducts } = require('./productControllers/GetProducts');
 const addProduct = require('./productControllers/ProductAdd');
 const updateProduct = require('./productControllers/UpdateProduct');
@@ -13,7 +16,6 @@ const { updateCoverPic } = require('./userControllers/UpdateCoverPic');
 
 
 module.exports = {
-
     //USER MODEL RELATED
     registerUser,
     loginUser,
@@ -28,5 +30,10 @@ module.exports = {
     //PRODUCT MODEL RELATED
     addProduct,
     updateProduct,
-    getProducts
+    getProducts,
+    //CART MODEL RELATED
+    addToCart,
+    decreaseCartQty,
+    allCart
+
 }

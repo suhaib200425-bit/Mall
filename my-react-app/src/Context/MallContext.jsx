@@ -30,6 +30,7 @@ export const AppProvider = ({ children }) => {
 
         }
         checklogged()
+        allCartItems()
         Promise.allSettled([Apiworking(), getCategorys()])
             .then((data) => {
 
@@ -56,8 +57,6 @@ export const AppProvider = ({ children }) => {
     async function Apiworking() {
         try {
             const response = await axios.get(`${API_END_POINT}`)
-
-            alert(response.data.message)
             return response.data;
 
         } catch (error) {
@@ -65,6 +64,35 @@ export const AppProvider = ({ children }) => {
                 status: false,
                 message: error.response?.data?.message || error.message
             };
+        }
+    }
+
+    async function allCartItems() {
+        try {
+            const response = await axios.get(`${API_END_POINT}/api/cart/get`,{
+                headers:{
+                    Authorization:token
+                }
+            })
+
+            alert(response.data.message)
+            if(response.data.status){
+                const cartItem=response.data.carts
+                console.log("Cart");
+                console.log(cartItem);
+                
+                cartItem.map(elem=>{
+                    setCart(prev=>{
+                        return {...prev,[elem.productId._id]:elem}
+                    })
+                })
+                
+            }else{
+                alert(response.data.message)
+            }
+
+        } catch (error) {
+           alert(error.response?.data?.message || error.message)
         }
     }
 
