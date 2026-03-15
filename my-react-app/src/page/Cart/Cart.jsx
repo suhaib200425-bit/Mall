@@ -7,16 +7,18 @@ import { API_END_POINT } from '../../assets/main';
 function Cart() {
     const token = localStorage.getItem('token')
     const [products, setproducts] = useState();
-    const { cart, setCart } = useMall()
+    const { setCart, cart } = useMall()
     const [subtotal, setSubtotal] = useState(0)
 
     useEffect(() => {
         const cartList = Object.values(cart);
         console.log(cartList);
-        setSubtotal(1000)
         console.log(0)
+        const sum = cartList.reduce((total, item) => total + ((item.productId.offerRate ? item.productId.offerRate : item.productId.rate) * item.qty), 0);
         setproducts(cartList)
-    }, [])
+
+        setSubtotal(sum)
+    }, [cart])
 
     const increase = async (id, value) => {
         const response = await axios.get(`${API_END_POINT}/api/cart/add/${id}`, {
@@ -62,19 +64,45 @@ function Cart() {
             })
             setproducts(filterproduct)
         }
-        if(!response.data.cart){
-             setCart((prev) => {
-                    const newCart = { ...prev };
-                    delete newCart[id]; // remove item
-                    return newCart;
+        if (!response.data.cart) {
+            setCart((prev) => {
+                const newCart = { ...prev };
+                delete newCart[id]; // remove item
+                return newCart;
             });
             const newArray = products.filter((item) => item.productId._id !== id);
             setproducts(newArray)
         }
     };
 
-    const removeItem = (id) => {
-        setproducts(products.filter(item => item.id !== id));
+    const deleteCart = async (cartId, productId) => {
+        try {
+            const token = localStorage.getItem("token");
+
+            const res = await axios.delete(
+                `${API_END_POINT}/api/cart/delete/${cartId}`,
+                {
+                    headers: {
+                        Authorization: token
+                    }
+                }
+            );
+
+            console.log(res.data);
+
+            if (res.data.status) {
+                // state il ninn remove cheyyam
+                setCart((prev) => {
+                    const newCart = { ...prev };
+                    delete newCart[productId]; // remove item
+                    return newCart;
+                });
+                setproducts((prev) => prev.filter((item) => item._id !== cartId));
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     // const subtotal = products.reduce((acc, item) => acc + item.rate, 0);
@@ -131,7 +159,7 @@ function Cart() {
                                 <div>
                                     <button
                                         className="delete-btn"
-                                        onClick={() => removeItem(item._id)}
+                                        onClick={() => deleteCart(item._id, item.productId._id)}
                                     >
                                         🗑
                                     </button>

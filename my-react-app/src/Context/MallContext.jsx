@@ -75,7 +75,6 @@ export const AppProvider = ({ children }) => {
                 }
             })
 
-            alert(response.data.message)
             if(response.data.status){
                 const cartItem=response.data.carts
                 console.log("Cart");
@@ -123,7 +122,8 @@ export const AppProvider = ({ children }) => {
             Categorys,
             setCategorys,
             //other categorys
-            getCategorys
+            getCategorys,
+    
         }}>
             {children}
         </AppContext.Provider>
