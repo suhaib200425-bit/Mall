@@ -10,6 +10,7 @@ export const AppProvider = ({ children }) => {
     const [cart, setCart] = useState({})
     const [Companys, setCompanys] = useState([])
     const [Categorys, setCategorys] = useState([])
+        const [Products, setProducts] = useState([])
     const token = localStorage.getItem('token')
     useEffect(() => {
 
@@ -121,6 +122,8 @@ export const AppProvider = ({ children }) => {
             setCompanys,
             Categorys,
             setCategorys,
+            Products,
+            setProducts,
             //other categorys
             getCategorys,
     

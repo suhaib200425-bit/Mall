@@ -9,9 +9,10 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Splash from './page/Splash/Splash';
+import AddProduct from './compones/AddProduct/AddProduct';
 
 function App() {
-  const hideNavbar = ["/auth","/"];
+  const hideNavbar = ["/auth","/","/edit"];
   const location = useLocation()
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/shope/:shope" element={<Nesto />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/edit/:productId" element={<AddProduct />} />
       </Routes>
     </>
   )

@@ -3,7 +3,7 @@ const Product = require("../../models/product");
 const updateProduct = async (req, res) => {
   try {
     const { productId } = req.params;
-    const { productName, categoryName, companyId, rate, offerRate } = req.body;
+    const { productName, categoryName, rate, offerRate,per } = req.body;
 
     // product find cheyyuka
     const existingProduct = await Product.findById(productId);
@@ -17,7 +17,7 @@ const updateProduct = async (req, res) => {
 
     // new values or old values
     const updatedRate = rate ? Number(rate) : existingProduct.rate;
-    const updatedOfferRate = offerRate ? Number(offerRate) : existingProduct.offerRate;
+    const updatedOfferRate = offerRate ? Number(offerRate) : null;
 
     // validation
     if (updatedOfferRate > updatedRate) {
@@ -27,20 +27,17 @@ const updateProduct = async (req, res) => {
       });
     }
 
-    // auto calculate percentage
-    const per = Math.round(((updatedRate - updatedOfferRate) / updatedRate) * 100);
 
     // update fields
     existingProduct.productName = productName || existingProduct.productName;
     existingProduct.categoryName = categoryName || existingProduct.categoryName;
-    existingProduct.companyId = companyId || existingProduct.companyId;
     existingProduct.rate = updatedRate;
     existingProduct.offerRate = updatedOfferRate;
-    existingProduct.per = per;
+    existingProduct.per = per || existingProduct.per;
 
     // image update (if new image uploaded)
     if (req.file) {
-      existingProduct.image = req.file.path;
+      existingProduct.image = req.file.secure_url;
     }
 
     await existingProduct.save();

@@ -14,9 +14,8 @@ function Nesto() {
 
     const { shope } = useParams()
     const [Add, setAdd] = useState(false)
-    const [Products, setProducts] = useState([])
     const inputRef = useRef()
-    const { user } = useMall()
+    const { user,Products,setProducts } = useMall()
     const [BannerImage, setBannerImage] = useState(null)
     const [BannerImageFile, setBannerImageFile] = useState(null)
     const [Active, setActive] = useState('All')

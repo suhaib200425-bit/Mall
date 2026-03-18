@@ -4,6 +4,8 @@ const addToCart = require('./CartControllers/AddToCart');
 const allCart = require('./CartControllers/allCarts');
 const { decreaseCartQty } = require('./CartControllers/decreaseCartQty ');
 const { deleteCartItem } = require('./CartControllers/DeleteCart');
+const deleteProduct = require('./productControllers/DeleteProduct');
+const getProduct = require('./productControllers/GetProduct');
 const { getProducts } = require('./productControllers/GetProducts');
 const addProduct = require('./productControllers/ProductAdd');
 const updateProduct = require('./productControllers/UpdateProduct');
@@ -32,6 +34,8 @@ module.exports = {
     addProduct,
     updateProduct,
     getProducts,
+    deleteProduct,
+    getProduct,
     //CART MODEL RELATED
     addToCart,
     decreaseCartQty,

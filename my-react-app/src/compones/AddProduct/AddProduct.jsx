@@ -1,12 +1,16 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./AddProduct.css";
 import { API_END_POINT } from "../../assets/main";
 import axios from "axios";
 
 import { toast } from "react-toastify";
+import { useNavigate, useParams } from "react-router-dom";
 const AddProduct = ({ setProducts }) => {
   const inputRef = useRef();
+  const Navigate= useNavigate()
   const token = localStorage.getItem('token')
+  const { productId } = useParams()
+  const [Image, setImage] = useState()
   const [productData, setProductData] = useState({
     productName: "",
     rate: "",
@@ -15,6 +19,33 @@ const AddProduct = ({ setProducts }) => {
     category: "",
     image: null,
   });
+
+  useEffect(() => {
+    const GetProduct = async () => {
+      const response = await axios.get(`${API_END_POINT}/api/product/get/${productId}`, {
+        headers: {
+          Authorization: token
+        }
+      })
+      console.log(response.data);
+      if (response.data.status) {
+        const product = response.data.product
+        setProductData({
+          productName: product.productName,
+          rate: product.rate,
+          offerRate: product.offerRate || null,
+          per: product.per,
+          category: product.categoryName,
+          image: null,
+        });
+
+        setImage(product.image)
+      }
+    }
+    if (productId) {
+      GetProduct()
+    }
+  }, [])
 
   const categories = [
     "Classic AvilMilk",
@@ -41,13 +72,14 @@ const AddProduct = ({ setProducts }) => {
       ...prev,
       image: e.target.files[0],
     }));
+    setImage(URL.createObjectURL(e.target.files[0]))
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     // hidden input required issue avoid cheyyan manual check
-    if (!productData.image) {
+    if (!productData.image && !productId) {
       alert("Please select product image");
       return;
     }
@@ -67,35 +99,53 @@ const AddProduct = ({ setProducts }) => {
     formData.append("per", productData.per);
 
     console.log("Product Data:", productData);
-
-    axios.post(`${API_END_POINT}/api/product/save`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: token
-      },
-    })
-      .then((res) => {
-        console.log(res.data)
-        if (res.data.status) {
-          toast.success(res.data.message)
-          setProducts(prev => [res.data.product, ...prev])
-          setProductData(
-            {
-              productName: "",
-              rate: "",
-              offerRate: null,
-              per: "",
-              category: "",
-              image: null,
-            }
-          )
-        } else {
-          toast.error(res.data.message)
-        }
+    let response;
+    if (productId) {
+      response = await axios.patch(`${API_END_POINT}/api/product/update/${productId}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: token
+        },
       })
-      .catch((err) => console.log(err));
 
-    alert("Product Added Successfully");
+    } else {
+      response = await axios.post(`${API_END_POINT}/api/product/save`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: token
+        },
+      })
+    }
+
+
+    if (response.data.status) {
+      console.log(response.data)
+      if (response.data.status) {
+        toast.success(response.data.message)
+        if (productId) {
+          Navigate(-1)
+        } else {
+          setProducts(prev => [res.data.product, ...prev])
+        }
+        setProductData(
+          {
+            productName: "",
+            rate: "",
+            offerRate: null,
+            per: "",
+            category: "",
+            image: null,
+          }
+        )
+      } else {
+        toast.error(res.data.message)
+      }
+    }
+    else {
+      console.log(response.data.message)
+    }
+
+
   };
 
   return (
@@ -117,8 +167,8 @@ const AddProduct = ({ setProducts }) => {
               }}
               className="productImage"
               src={
-                productData.image
-                  ? URL.createObjectURL(productData.image)
+                Image
+                  ? Image
                   : "https://i.pinimg.com/1200x/ae/3f/c0/ae3fc0a9ed8e7f4edb630e7492ee22bd.jpg"
               }
               alt="Product Preview"
