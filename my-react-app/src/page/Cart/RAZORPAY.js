@@ -1,6 +1,10 @@
 import React from "react";
 import axios from "axios";
 import { API_END_POINT } from "../../assets/main";
+
+
+const token = localStorage.getItem("token");
+
 const loadRazorpayScript = () => {
     return new Promise((resolve) => {
         const script = document.createElement("script");
@@ -12,7 +16,7 @@ const loadRazorpayScript = () => {
 };
 
 
-const handlePayment = async () => {
+const handlePayment = async (amount) => {
     try {
         const loaded = await loadRazorpayScript();
 
@@ -21,11 +25,10 @@ const handlePayment = async () => {
             return;
         }
 
-        const token = localStorage.getItem("token");
 
         const { data } = await axios.post(
             `${API_END_POINT}/api/rayzorpay/order`,
-            { amount: 10 },
+            { amount },
             {
                 headers: {
                     Authorization: token,
@@ -70,6 +73,7 @@ const handlePayment = async () => {
     } catch (error) {
         console.log(error);
         alert("Payment process failed");
+        return false
     }
 };
 

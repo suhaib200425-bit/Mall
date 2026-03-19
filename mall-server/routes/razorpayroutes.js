@@ -9,5 +9,8 @@ router.get("/", (req, res) => {
 
 router.post('/order',verifyToken,createRazorpayOrder)
 router.post('/verify',verifyToken,verifyRazorpayPayment)
+router.get('/verify',verifyToken,(req,res)=>{
+   res.send('okey')
+})
 
 module.exports = router;

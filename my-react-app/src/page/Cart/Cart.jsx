@@ -224,7 +224,13 @@ function Cart() {
 
                         </div>
 
-                        <button className="checkout-btn mt-4" onClick={handlePayment}>
+                        <button className="checkout-btn mt-4" onClick={async()=>{
+                            const status= await handlePayment(subtotal!=0?subtotal+10:0)
+                            if(status){
+                                setCart({})
+                                setproducts([])
+                            }
+                        }}>
                             Checkout Now
                         </button>
 

@@ -12,7 +12,7 @@ import Splash from './page/Splash/Splash';
 import AddProduct from './compones/AddProduct/AddProduct';
 
 function App() {
-  const hideNavbar = ["/auth","/","/edit"];
+  const hideNavbar = ["/auth", "/", "/edit"];
   const location = useLocation()
   return (
     <>

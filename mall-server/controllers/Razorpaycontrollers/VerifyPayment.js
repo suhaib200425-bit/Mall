@@ -42,13 +42,13 @@ const verifyRazorpayPayment = async (req, res) => {
     let subtotal = 0;
 
     cartItems.forEach((cart) => {
-      const itemTotal = cart.quantity * cart.productId.price;
+      const itemTotal = cart.qty * cart.productId?cart.productId.offerRate:cart.productId.rate;
 
       items.push({
         productId: cart.productId._id,
         productName: cart.productId.productName,
-        price: cart.productId.price,
-        quantity: cart.quantity,
+        price: cart.productId.rate,
+        quantity: cart.qty,
         total: itemTotal,
       });
 
@@ -74,14 +74,14 @@ const verifyRazorpayPayment = async (req, res) => {
     // 5. clear cart
     await Cart.deleteMany({ userId });
 
-    res.status(200).json({
+    res.json({
       status: true,
       message: "Payment verified and order created successfully",
       order: newOrder,
     });
   } catch (error) {
-    console.log("Verification error:", error);
-    res.status(500).json({
+    console.log("Verification error:", error.message);
+    res.json({
       status: false,
       message: "Payment verification failed",
     });
