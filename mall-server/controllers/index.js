@@ -4,11 +4,14 @@ const addToCart = require('./CartControllers/AddToCart');
 const allCart = require('./CartControllers/allCarts');
 const { decreaseCartQty } = require('./CartControllers/decreaseCartQty ');
 const { deleteCartItem } = require('./CartControllers/DeleteCart');
+const { createOrder } = require('./orderControllers/CreateOrder');
 const deleteProduct = require('./productControllers/DeleteProduct');
 const getProduct = require('./productControllers/GetProduct');
 const { getProducts } = require('./productControllers/GetProducts');
 const addProduct = require('./productControllers/ProductAdd');
 const updateProduct = require('./productControllers/UpdateProduct');
+const createRazorpayOrder = require('./Razorpaycontrollers/Order');
+const verifyRazorpayPayment = require('./Razorpaycontrollers/VerifyPayment');
 const getCategorys = require('./userControllers/GetCategory');
 const getCategoryCompanys = require('./userControllers/GetCategoryCompany');
 const getCompany = require('./userControllers/GetCompany ');
@@ -40,6 +43,10 @@ module.exports = {
     addToCart,
     decreaseCartQty,
     allCart,
-    deleteCartItem
-
+    deleteCartItem,
+    //ORDER MODEL RELATED
+    createOrder,
+    //ORDER MODEL PAYMENT RELATED
+    createRazorpayOrder,
+    verifyRazorpayPayment,
 }

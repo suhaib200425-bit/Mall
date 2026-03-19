@@ -4,6 +4,7 @@ import { Offer } from '../../assets/assets';
 import { useMall } from '../../Context/MallContext';
 import axios from 'axios';
 import { API_END_POINT } from '../../assets/main';
+import handlePayment from './RAZORPAY';
 function Cart() {
     const token = localStorage.getItem('token')
     const [products, setproducts] = useState();
@@ -223,7 +224,7 @@ function Cart() {
 
                         </div>
 
-                        <button className="checkout-btn mt-4">
+                        <button className="checkout-btn mt-4" onClick={handlePayment}>
                             Checkout Now
                         </button>
 

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 const AddProduct = ({ setProducts }) => {
   const inputRef = useRef();
-  const Navigate= useNavigate()
+  const Navigate = useNavigate()
   const token = localStorage.getItem('token')
   const { productId } = useParams()
   const [Image, setImage] = useState()
@@ -95,7 +95,8 @@ const AddProduct = ({ setProducts }) => {
     if (productData.offerRate)
       formData.append("offerRate", productData.offerRate);
     formData.append("categoryName", productData.category);
-    formData.append("image", productData.image);
+    if (productData.image)
+      formData.append("image", productData.image);
     formData.append("per", productData.per);
 
     console.log("Product Data:", productData);
