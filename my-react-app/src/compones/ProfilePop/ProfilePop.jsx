@@ -27,7 +27,11 @@ function ProfilePop({ setpop }) {
                 {
                     user._id&&
                     <>
-                    <div className="Orders">
+                    <div className="Orders" 
+                    onClick={()=>{
+                        
+                    Navigate('/order')
+                    }}>
                     <h5>Orders</h5>
                 </div>
                 <div className="logOut" onClick={() => {

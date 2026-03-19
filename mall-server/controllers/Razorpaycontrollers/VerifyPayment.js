@@ -49,6 +49,7 @@ const verifyRazorpayPayment = async (req, res) => {
         productName: cart.productId.productName,
         price: cart.productId.rate,
         quantity: cart.qty,
+        commapnyId:cart.productId.companyId,
         total: itemTotal,
       });
 

@@ -4,6 +4,7 @@ const addToCart = require('./CartControllers/AddToCart');
 const allCart = require('./CartControllers/allCarts');
 const { decreaseCartQty } = require('./CartControllers/decreaseCartQty ');
 const { deleteCartItem } = require('./CartControllers/DeleteCart');
+const allOrders = require('./orderControllers/AllUserOrders');
 const { createOrder } = require('./orderControllers/CreateOrder');
 const deleteProduct = require('./productControllers/DeleteProduct');
 const getProduct = require('./productControllers/GetProduct');
@@ -46,6 +47,7 @@ module.exports = {
     deleteCartItem,
     //ORDER MODEL RELATED
     createOrder,
+    allOrders,
     //ORDER MODEL PAYMENT RELATED
     createRazorpayOrder,
     verifyRazorpayPayment,

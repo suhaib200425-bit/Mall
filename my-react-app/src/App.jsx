@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Splash from './page/Splash/Splash';
 import AddProduct from './compones/AddProduct/AddProduct';
+import Order from './page/Order/Order';
 
 function App() {
   const hideNavbar = ["/auth", "/", "/edit"];
@@ -26,6 +27,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/shope/:shope" element={<Nesto />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/order" element={<Order />} />
         <Route path="/edit/:productId" element={<AddProduct />} />
       </Routes>
     </>
