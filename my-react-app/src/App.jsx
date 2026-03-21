@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Splash from './page/Splash/Splash';
 import AddProduct from './compones/AddProduct/AddProduct';
 import Order from './page/Order/Order';
+import Footer from './compones/Footer/Footer';
 
 function App() {
   const hideNavbar = ["/auth", "/", "/edit"];
@@ -30,6 +31,7 @@ function App() {
         <Route path="/order" element={<Order />} />
         <Route path="/edit/:productId" element={<AddProduct />} />
       </Routes>
+      {!hideNavbar.includes(location.pathname) && <Footer />}
     </>
   )
 }

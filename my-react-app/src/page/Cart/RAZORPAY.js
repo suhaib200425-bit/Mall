@@ -71,7 +71,7 @@ const handlePayment = async (amount) => {
         const razorpay = new window.Razorpay(options);
         razorpay.open();
     } catch (error) {
-        console.log(error);
+        console.log(error.message);
         alert("Payment process failed");
         return false
     }
