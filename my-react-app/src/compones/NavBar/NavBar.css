@@ -82,6 +82,9 @@
     .rightBar .SearchIcon {
         display: flex;
     }
+        .rightBar div{
+            background-color: transparent;
+        }
 }
 
 @media (min-width: 768px) {}

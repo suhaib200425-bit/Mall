@@ -79,6 +79,7 @@ console.log(response.data);
               <p><strong>Total:</strong> ₹{order.subtotal}</p>
               <p><strong>Items:</strong> {order.items?.length || 0}</p>
               <p><strong>Date:</strong> {new Date(order.createdAt).toLocaleDateString()}</p>
+              <strong>Status:</strong> {order.orderStatus}
 
               {/* <div className="order-items">
                 <h4>Products:</h4>

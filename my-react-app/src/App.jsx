@@ -12,6 +12,7 @@ import Splash from './page/Splash/Splash';
 import AddProduct from './compones/AddProduct/AddProduct';
 import Order from './page/Order/Order';
 import Footer from './compones/Footer/Footer';
+import ChatGptNavBar from './compones/ChatGptNavBar/ChatGptNavBar';
 
 function App() {
   const hideNavbar = ["/auth", "/", "/edit"];
